@@ -15,3 +15,20 @@ void Communicator::bindAndListen()
 		throw std::exception(__FUNCTION__ " - listen");
 	printf("listening...\n");
 }
+
+void Communicator::handleNewClient()
+{
+	
+}
+
+void Communicator::startHandleRequests()
+{
+	SOCKET client_socket = accept(_socket, NULL, NULL);
+	if (client_socket == INVALID_SOCKET)
+		throw std::exception(__FUNCTION__);
+
+	printf("Client accepted !\n");
+	// create new thread for client	and detach from it
+	std::thread t_connector(&handleNewClient, this, client_socket);
+	tr.detach();
+}
