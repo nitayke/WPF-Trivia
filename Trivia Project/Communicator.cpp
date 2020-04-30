@@ -23,12 +23,19 @@ void Communicator::handleNewClient()
 
 void Communicator::startHandleRequests()
 {
-	SOCKET client_socket = accept(_socket, NULL, NULL);
+	// notice that we step out to the global namespace
+	// for the resolution of the function accept
+
+	// this accepts the client and create a specific socket from server to this client
+	SOCKET client_socket = ::accept(_serverSocket, NULL, NULL);
+
 	if (client_socket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__);
 
-	printf("Client accepted !\n");
-	// create new thread for client	and detach from it
-	std::thread t_connector(&handleNewClient, this, client_socket);
+	std::cout << "Client accepted. Server and client can speak" << std::endl;
+
+	// the function that handle the conversation with the client
+
+	std::thread tr(&handleNewClient, this, client_socket);
 	tr.detach();
 }
