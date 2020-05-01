@@ -1,4 +1,4 @@
-#include "Communicator.h"
+﻿#include "Communicator.h"
 
 void Communicator::bindAndListen()
 {
@@ -16,26 +16,26 @@ void Communicator::bindAndListen()
 	printf("listening...\n");
 }
 
-void Communicator::handleNewClient()
+void Communicator::handleNewClient() // we have to implement this function
 {
 	
 }
 
 void Communicator::startHandleRequests()
 {
-	// notice that we step out to the global namespace
-	// for the resolution of the function accept
+	while (true)
+	{
+		SOCKET client_socket = accept(_socket, NULL, NULL); // we have to save the socket somewhere
+		if (client_socket == INVALID_SOCKET)
+			throw std::exception(__FUNCTION__);
 
-	// this accepts the client and create a specific socket from server to this client
-	SOCKET client_socket = ::accept(_serverSocket, NULL, NULL);
+		printf("Client accepted !\n");
+		// create new thread for client	and detach from it
+		std::thread tr(&handleNewClient, this);
+		tr.detach();
 
-	if (client_socket == INVALID_SOCKET)
-		throw std::exception(__FUNCTION__);
+		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, nullptr));
+		// we need to replace the null by LoginRequest or something
 
-	std::cout << "Client accepted. Server and client can speak" << std::endl;
-
-	// the function that handle the conversation with the client
-
-	std::thread tr(&handleNewClient, this, client_socket);
-	tr.detach();
+	}
 }
