@@ -9,6 +9,7 @@ sock.connect(server_address)
 
 server_msg = sock.recv(5)
 server_msg = server_msg.decode()
+print(server_msg)
 if server_msg == "Hello":
     client_msg = "Hello"
     sock.sendall(client_msg.encode())
