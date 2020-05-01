@@ -2,9 +2,10 @@
 #include <map>
 #include <thread>
 #include <winsock2.h>
+#include <string>
 #include "LoginRequestHandler.h"
 
-#define PORT 2223
+#define PORT 2222
 
 class Communicator
 {
@@ -14,7 +15,7 @@ private:
 
 
 	void bindAndListen();
-	void handleNewClient();
+	void handleNewClient(SOCKET socket);
 public:
 	Communicator();
 	~Communicator();

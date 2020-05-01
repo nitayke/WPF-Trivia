@@ -16,11 +16,17 @@ void Communicator::bindAndListen()
 	printf("listening...\n");
 }
 
-void Communicator::handleNewClient() // we have to implement this function
+void Communicator::handleNewClient(SOCKET client_socket)
 {
 	char buffer[6] = { 0 };
-	send(_socket, "Hello", 5, 0);
-	recv(_socket, buffer, 5, 0);
+	if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
+		throw std::exception("Error while sending message to client");
+	int res = recv(client_socket, buffer, 5, 0);
+	if (res == INVALID_SOCKET)
+	{
+		throw std::exception("Error while recieving from socket");
+	}
+	printf(buffer);
 }
 
 Communicator::Communicator()
@@ -51,11 +57,9 @@ void Communicator::startHandleRequests()
 
 		printf("Client accepted !\n");
 		// create new thread for client	and detach from it
-		std::thread tr(&Communicator::handleNewClient, this);
+		std::thread tr(&Communicator::handleNewClient, this, client_socket);
 		tr.detach();
 
 		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, new LoginRequestHandler()));
-		// we need to replace the null by LoginRequest or something
-
 	}
 }
