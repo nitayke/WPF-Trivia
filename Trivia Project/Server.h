@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Communicator.h"
+#include "WSAInitializer.h"
 
 class Server
 {

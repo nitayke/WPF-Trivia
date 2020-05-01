@@ -1,10 +1,10 @@
 #pragma once
 #include <map>
-#include <WinSock2.h>
 #include <thread>
+#include <winsock2.h>
 #include "LoginRequestHandler.h"
 
-#define PORT 2222
+#define PORT 2223
 
 class Communicator
 {
@@ -16,6 +16,8 @@ private:
 	void bindAndListen();
 	void handleNewClient();
 public:
+	Communicator();
+	~Communicator();
 	void startHandleRequests();
 };
 

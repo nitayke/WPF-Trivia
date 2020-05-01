@@ -18,9 +18,25 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient() // we have to implement this function
 {
-	char buffer[5];
+	char buffer[6] = { 0 };
 	send(_socket, "Hello", 5, 0);
 	recv(_socket, buffer, 5, 0);
+}
+
+Communicator::Communicator()
+{
+	_socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (_socket == INVALID_SOCKET)
+		throw std::exception(__FUNCTION__ " - socket");
+}
+
+Communicator::~Communicator()
+{
+	try
+	{
+		::closesocket(_socket);
+	}
+	catch (...) {}
 }
 
 void Communicator::startHandleRequests()
@@ -38,7 +54,7 @@ void Communicator::startHandleRequests()
 		std::thread tr(&Communicator::handleNewClient, this);
 		tr.detach();
 
-		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, nullptr));
+		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, new LoginRequestHandler()));
 		// we need to replace the null by LoginRequest or something
 
 	}

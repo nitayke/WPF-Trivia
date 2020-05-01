@@ -3,7 +3,7 @@
 void Server::run()
 {
 	// create new thread for handling message
-	std::thread t_connector(&Communicator::startHandleRequests, this);
+	std::thread t_connector(&Communicator::startHandleRequests, &m_communicator);
 	t_connector.detach();
 
 	std::string command;
