@@ -10,6 +10,7 @@ class Communicator
 {
 private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
+	SOCKET _socket;
 
 
 	void bindAndListen();
