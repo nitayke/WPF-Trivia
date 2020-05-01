@@ -2,6 +2,7 @@
 
 void Server::run()
 {
+	WSAInitializer wsa_init;
 	// create new thread for handling message
 	std::thread t_connector(&Communicator::startHandleRequests, this);
 	t_connector.detach();
