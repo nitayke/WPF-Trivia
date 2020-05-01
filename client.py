@@ -12,3 +12,5 @@ server_msg = server_msg.decode()
 if server_msg == "Hello":
     client_msg = "Hello"
     sock.sendall(client_msg.encode())
+
+sock.close()
