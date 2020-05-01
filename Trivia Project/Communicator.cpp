@@ -29,6 +29,6 @@ void Communicator::startHandleRequests()
 
 	printf("Client accepted !\n");
 	// create new thread for client	and detach from it
-	std::thread t_connector(&handleNewClient, this, client_socket);
+	std::thread tr(&handleNewClient, this, client_socket);
 	tr.detach();
 }
