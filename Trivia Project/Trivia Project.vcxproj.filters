@@ -47,10 +47,20 @@
     <ClInclude Include="WSAInitializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="JsonResponsePacketSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JsonRequestPacketDeserializer.h">
+=======
+    <ClInclude Include="RequestsStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResponsesStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlersStructs.h">
+>>>>>>> aecf64255c29e606492bdb054fc3725ef36547ce
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
