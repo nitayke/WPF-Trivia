@@ -1,5 +1,11 @@
 #pragma once
-#include "HandlersStructs.h"
+#include <vector>
+
+typedef unsigned char byte;
+typedef std::vector<byte> Buffer;
+
+struct RequestInfo;
+struct RequestResult;
 
 class IRequestHandler
 {

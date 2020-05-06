@@ -133,6 +133,10 @@
     <ClInclude Include="Communicator.h" />
     <ClInclude Include="HandlersStructs.h" />
     <ClInclude Include="IRequestHandler.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="json.hpp" />
+>>>>>>> 7ab7e3f16a0c6fa8d0b173f32e64903ae7a05b82
     <ClInclude Include="JsonRequestPacketDeserializer.h" />
     <ClInclude Include="JsonResponsePacketSerializer.h" />
     <ClInclude Include="LoginRequestHandler.h" />

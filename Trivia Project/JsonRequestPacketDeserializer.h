@@ -1,13 +1,13 @@
 #pragma once
-
-#include <iostream>
+#include "ResponsesStructs.h"
+#include "RequestsStructs.h"
+#include "IRequestHandler.h"
 
 class JsonRequestPacketDeserializer
 {
 public:
-	static LoginResponse deserializeLoginRequest(buffer buf);
-	static SignupRequest deserializeSignupRequest(buffer buf);
-
+	static LoginResponse deserializeLoginRequest(Buffer buf);
+	static SignupRequest deserializeSignupRequest(Buffer buf);
 };
 
 

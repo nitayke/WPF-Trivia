@@ -5,13 +5,13 @@
 
 struct RequestResult
 {
-	buffer response;
+	Buffer response;
 	IRequestHandler* newHandler;
 };
 
 struct RequestInfo
 {
-	RequestId id;
+	byte id;
 	time_t receivalTime;
-	std::vector<unsigned int> buffer;
+	Buffer buffer;
 };

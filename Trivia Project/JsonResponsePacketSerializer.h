@@ -1,12 +1,11 @@
 #pragma once
-
-#include <iostream>
+#include "ResponsesStructs.h"
+#include "IRequestHandler.h"
  
 class JsonResponsePacketSerializer
 {
 public:
-	static buffer SerializeResponse(ErrorResponse response);
-	static buffer SerializeResponse(LoginResponse response);
-	static buffer SerializeResponse(SignupResponse response);
-
+	static Buffer SerializeResponse(ErrorResponse response);
+	static Buffer SerializeResponse(LoginResponse response);
+	static Buffer SerializeResponse(SignupResponse response);
 };
