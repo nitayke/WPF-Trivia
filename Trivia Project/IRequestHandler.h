@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "json.hpp"
 
 typedef unsigned char byte;
 typedef std::vector<byte> Buffer;
