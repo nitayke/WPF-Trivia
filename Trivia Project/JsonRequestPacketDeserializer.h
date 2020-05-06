@@ -5,8 +5,8 @@
 class JsonRequestPacketDeserializer
 {
 public:
-	static LoginResponse deserializeLoginRequest(buffer buf);
-	static SignupRequest deserializeSignupRequest(buffer buf);
+	static LoginResponse deserializeLoginRequest(std::string buf);
+	static SignupRequest deserializeSignupRequest(std::string buf);
 };
 
 

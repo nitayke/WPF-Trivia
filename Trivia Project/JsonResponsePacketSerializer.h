@@ -4,8 +4,8 @@
 class JsonResponsePacketSerializer
 {
 public:
-	static buffer SerializeResponse(ErrorResponse response);
-	static buffer SerializeResponse(LoginResponse response);
-	static buffer SerializeResponse(SignupResponse response);
+	static std::string SerializeResponse(ErrorResponse response);
+	static std::string SerializeResponse(LoginResponse response);
+	static std::string SerializeResponse(SignupResponse response);
 
 };

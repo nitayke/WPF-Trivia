@@ -5,7 +5,7 @@
 
 struct RequestResult
 {
-	buffer response;
+	std::string response;
 	IRequestHandler* newHandler;
 };
 
