@@ -2,6 +2,9 @@
 #include <vector>
 #include "json.hpp"
 
+using nlohmann::json;
+using std::string;
+
 typedef unsigned char byte;
 typedef std::vector<byte> Buffer;
 
