@@ -6,7 +6,7 @@
 class JsonRequestPacketDeserializer
 {
 public:
-	static LoginResponse deserializeLoginRequest(Buffer buf);
+	static LoginRequest deserializeLoginRequest(Buffer buf);
 	static SignupRequest deserializeSignupRequest(Buffer buf);
 };
 
