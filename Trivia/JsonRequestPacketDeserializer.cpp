@@ -1,15 +1,16 @@
 #include "JsonRequestPacketDeserializer.h"
-#include <bitset>
+
 
 LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(Buffer buf)
 {
 	int size = buf.size();
 	string strMsg = "";
-	json mag;
-	for (int i = 0; i < size - 5; i++)
+	json msg;
+	for (int i = 5; i < size; i++)
 	{
-		strMsg += (char)buf.back();
+		strMsg += (char)buf[i];
 	}
+
 	
 	return LoginRequest();
 }
