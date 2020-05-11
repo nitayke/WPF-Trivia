@@ -1,5 +1,6 @@
 #pragma once
 #include "ResponsesStructs.h"
+#include "RequestsStructs.h"
 #include "IRequestHandler.h"
  
 class JsonResponsePacketSerializer

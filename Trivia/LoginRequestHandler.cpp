@@ -1,4 +1,5 @@
 #include "LoginRequestHandler.h"
+#include "JsonResponsePacketSerializer.h"
 
 bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
 {
@@ -7,5 +8,10 @@ bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
 
 RequestResult LoginRequestHandler::handleRequest(RequestInfo requestinfo)
 {
-	return RequestResult();
+	RequestResult req;
+	LoginResponse res;
+	res.status = LOGIN_SUCCESS;
+	req.response = JsonResponsePacketSerializer::SerializeResponse(res);
+	req.newHandler = nullptr;
+	return req;
 }
