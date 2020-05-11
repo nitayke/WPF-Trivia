@@ -1,9 +1,8 @@
 #include "LoginRequestHandler.h"
-#include "HandlersStructs.h"
 
 bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
 {
-	return false;
+	return requestinfo.id == LOGIN || requestinfo.id == SIGNUP;
 }
 
 RequestResult LoginRequestHandler::handleRequest(RequestInfo requestinfo)

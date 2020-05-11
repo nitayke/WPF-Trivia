@@ -18,7 +18,7 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET client_socket)
 {
-	char buffer[6] = { 0 };
+	char buffer[6];
 	if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
 		throw std::exception("Error while sending message to client");
 	int res = recv(client_socket, buffer, 5, 0);

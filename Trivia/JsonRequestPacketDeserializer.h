@@ -9,5 +9,3 @@ public:
 	static LoginRequest deserializeLoginRequest(Buffer buf);
 	static SignupRequest deserializeSignupRequest(Buffer buf);
 };
-
-

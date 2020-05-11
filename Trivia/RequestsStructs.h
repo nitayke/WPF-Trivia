@@ -13,3 +13,9 @@ struct SignupRequest
 	std::string password;
 	std::string email;
 };
+
+enum Codes
+{
+	LOGIN,
+	SIGNUP
+};
