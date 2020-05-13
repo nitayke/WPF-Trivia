@@ -38,7 +38,7 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		{
 			return;
 		}
-		handler.handleRequest(ri);
+		handler.handleRequest(ri); // RequestResult = handler.handleRequest(ri);
 		ri.id = tmp[0];
 		LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(tmp);
 		for (size_t i = 5; i < tmp.size(); i++)
@@ -47,7 +47,8 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		}
 		/*if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
 			throw std::exception("Error while sending message to client"); */
-		printf(buffer);
+		printf(buffer); // send the buffer 
+		// set the map to the new IRequestHandler* handler from the RequestResult 
 	}
 }
 
