@@ -4,6 +4,8 @@
 #include <winsock2.h>
 #include <string>
 #include "LoginRequestHandler.h"
+#include "IRequestHandler.h"
+#include "HandlersStructs.h"
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
 

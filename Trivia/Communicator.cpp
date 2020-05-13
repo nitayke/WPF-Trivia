@@ -18,12 +18,14 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET client_socket)
 {
-	LoginRequestHandler handler; // IRequestHandler* handler; 
+	IRequestHandler* handler; 
 	RequestInfo ri;
+	RequestResult result;
 	Buffer tmp;
 	char buffer[1024];
 	while (true)
-	{                           // handler = m_clients[client_socket]; 
+	{                           
+		handler = m_clients[client_socket];
 		int res = recv(client_socket, buffer, 1024, 0);
 		if (res == INVALID_SOCKET)
 		{
@@ -34,20 +36,21 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		{
 			tmp.push_back((byte)buffer[i]);
 		}
-		if (!handler.isRequestRelevant(ri))
+		if (!handler->isRequestRelevant(ri))
 		{
 			return;
 		}
-		handler.handleRequest(ri); // RequestResult = handler.handleRequest(ri);
+		result = handler->handleRequest(ri);
+		
 		ri.id = tmp[0];
 		LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(tmp);
 		for (size_t i = 5; i < tmp.size(); i++)
 		{
 			ri.buffer.push_back(tmp[i]);
 		}
-		/*if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
-			throw std::exception("Error while sending message to client"); */
 		printf(buffer); // send the buffer 
+		if (send(client_socket, buffer, 5, 0) == INVALID_SOCKET) //change the object that we send
+			throw std::exception("Error while sending message to client");
 		// set the map to the new IRequestHandler* handler from the RequestResult 
 	}
 }
