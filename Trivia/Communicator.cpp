@@ -18,40 +18,43 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET client_socket)
 {
-	IRequestHandler* handler; 
-	RequestInfo ri;
+	IRequestHandler* handler = m_clients[client_socket];
+	RequestInfo info;
 	RequestResult result;
 	Buffer tmp;
-	char buffer[1024];
+	char buffer[1024] = { 0 };
 	while (true)
-	{                           
-		handler = m_clients[client_socket];
+	{
 		int res = recv(client_socket, buffer, 1024, 0);
 		if (res == INVALID_SOCKET)
 		{
 			throw std::exception("Error while recieving from socket");
 		}
-		time(&ri.receivalTime);
+		time(&info.receivalTime);
 		for (size_t i = 0; i < 1024 && buffer[i] != '\0'; i++)
 		{
 			tmp.push_back((byte)buffer[i]);
 		}
-		if (!handler->isRequestRelevant(ri))
+		if (!handler->isRequestRelevant(info))
 		{
 			return;
 		}
-		result = handler->handleRequest(ri);
-		
-		ri.id = tmp[0];
 		LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(tmp);
-		for (size_t i = 5; i < tmp.size(); i++)
+		result = handler->handleRequest(info);
+		info.id = tmp[0];
+		for (int i = 0; i < 1024; i++)
 		{
-			ri.buffer.push_back(tmp[i]);
+			buffer[i] = '\0';
 		}
-		printf(buffer); // send the buffer 
+		int count = 0;
+		for (auto i : result.response)
+		{
+			buffer[count] = i;
+			count++;
+		}
 		if (send(client_socket, buffer, 5, 0) == INVALID_SOCKET) //change the object that we send
 			throw std::exception("Error while sending message to client");
-		// set the map to the new IRequestHandler* handler from the RequestResult 
+		m_clients[client_socket] = result.newHandler;
 	}
 }
 
@@ -82,10 +85,9 @@ void Communicator::startHandleRequests()
 			throw std::exception(__FUNCTION__);
 
 		printf("Client accepted !\n");
-		// create new thread for client	and detach from it
+		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, new LoginRequestHandler()));
+		
 		std::thread tr(&Communicator::handleNewClient, this, client_socket);
 		tr.detach();
-
-		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, new LoginRequestHandler()));
 	}
 }
