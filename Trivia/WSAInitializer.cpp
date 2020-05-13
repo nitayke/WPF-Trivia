@@ -1,6 +1,5 @@
 #include "WSAInitializer.h"
 
-
 WSAInitializer::WSAInitializer()
 {
 	WSADATA wsa_data = { };

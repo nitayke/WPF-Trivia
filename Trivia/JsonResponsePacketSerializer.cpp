@@ -1,5 +1,4 @@
 #include "JsonResponsePacketSerializer.h"
-#include <bitset>
 
 Buffer JsonResponsePacketSerializer::getLengthBuffer(string jsonMsg)
 {

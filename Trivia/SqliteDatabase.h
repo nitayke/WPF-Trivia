@@ -1,0 +1,21 @@
+#pragma once
+#include "IDatabase.h"
+#include "sqlite3.h"
+#include <iostream>
+#include <io.h>
+
+class SqliteDatabase : public IDatabase 
+{
+private:
+	sqlite3* db;
+	string dbFileName = "db.sqlite";
+
+	static int callback1(void* data, int argc, char** argv, char** azColName);
+	static int callback2(void* data, int argc, char** argv, char** azColName);
+public:
+	bool open();
+	void close();
+	bool doesUserExist(string username) override;
+	bool doesPasswordMatch(string username, string password) override;
+	void addNewUser(string username, string password, string email) override;
+};

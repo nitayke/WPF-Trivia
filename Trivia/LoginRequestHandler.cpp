@@ -1,5 +1,4 @@
 #include "LoginRequestHandler.h"
-#include "JsonResponsePacketSerializer.h"
 
 bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
 {

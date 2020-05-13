@@ -1,6 +1,5 @@
 #include "JsonRequestPacketDeserializer.h"
 
-
 LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(Buffer buf)
 {
 	int size = buf.size();
