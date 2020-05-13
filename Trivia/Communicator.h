@@ -4,6 +4,8 @@
 #include <winsock2.h>
 #include <string>
 #include "LoginRequestHandler.h"
+#include "JsonRequestPacketDeserializer.h"
+#include "JsonResponsePacketSerializer.h"
 
 #define PORT 2222
 

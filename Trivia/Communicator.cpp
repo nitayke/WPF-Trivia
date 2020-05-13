@@ -18,15 +18,37 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET client_socket)
 {
-	char buffer[6];
-	if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
-		throw std::exception("Error while sending message to client");
-	int res = recv(client_socket, buffer, 5, 0);
-	if (res == INVALID_SOCKET)
+	LoginRequestHandler handler;
+	RequestInfo ri;
+	Buffer tmp;
+	char buffer[1024];
+	while (true)
 	{
-		throw std::exception("Error while recieving from socket");
+		int res = recv(client_socket, buffer, 1024, 0);
+		if (res == INVALID_SOCKET)
+		{
+			throw std::exception("Error while recieving from socket");
+		}
+		time(&ri.receivalTime);
+		for (size_t i = 0; i < 1024 && buffer[i] != '\0'; i++)
+		{
+			tmp.push_back((byte)buffer[i]);
+		}
+		if (!handler.isRequestRelevant(ri))
+		{
+			return;
+		}
+		handler.handleRequest(ri);
+		ri.id = tmp[0];
+		LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(tmp);
+		for (size_t i = 5; i < tmp.size(); i++)
+		{
+			ri.buffer.push_back(tmp[i]);
+		}
+		/*if (send(client_socket, "Hello", 5, 0) == INVALID_SOCKET)
+			throw std::exception("Error while sending message to client"); */
+		printf(buffer);
 	}
-	printf(buffer);
 }
 
 Communicator::Communicator()
