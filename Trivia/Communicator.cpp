@@ -18,12 +18,12 @@ void Communicator::bindAndListen()
 
 void Communicator::handleNewClient(SOCKET client_socket)
 {
-	LoginRequestHandler handler;
+	LoginRequestHandler handler; // IRequestHandler* handler; 
 	RequestInfo ri;
 	Buffer tmp;
 	char buffer[1024];
 	while (true)
-	{
+	{                           // handler = m_clients[client_socket]; 
 		int res = recv(client_socket, buffer, 1024, 0);
 		if (res == INVALID_SOCKET)
 		{
