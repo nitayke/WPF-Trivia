@@ -14,6 +14,7 @@ class Communicator
 private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET _socket;
+	RequestHandlerFactory m_handlerFactory;
 
 	void handleNewClient(SOCKET socket);
 public:
