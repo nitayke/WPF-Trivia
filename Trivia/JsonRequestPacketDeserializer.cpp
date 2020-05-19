@@ -6,7 +6,7 @@ LoginRequest JsonRequestPacketDeserializer::deserializeLoginRequest(Buffer buf)
 	string strMsg = "";
 	json msg;
 	LoginRequest req;
-	for (int i = 5; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		strMsg += (char)buf[i];
 	}
@@ -23,7 +23,7 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(Buffer buf
 	string strMsg = "";
 	json msg;
 	SignupRequest req;
-	for (int i = 5; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		strMsg += (char)buf[i];
 	}
