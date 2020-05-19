@@ -12,11 +12,13 @@ except socket.error as err:
 server_address = (SERVER_IP, SERVER_PORT)
 sock.connect(server_address)
 
-server_msg = sock.recv(5)
-print(server_msg.decode())
+msg = {"username": "nitayke", "password": "1234567890", "email": "nitayke1@gmail.com"}
+sock.sendall(bytes([1, 0, 0, 0, len(str(msg))]) + str(msg).encode())
+print(sock.recv(1024).decode())
 
-if server_msg == "Hello":
-    client_msg = "Hello"
-    sock.sendall(client_msg.encode())
+msg = {"username": "nitayke", "password": "1234567890"}
+sock.sendall(bytes([0, 0, 0, 0, len(str(msg))]) + str(msg).encode())
+print(sock.recv(1024).decode())
 
 sock.close()
+
