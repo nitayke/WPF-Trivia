@@ -15,11 +15,11 @@ private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET _socket;
 
-	void bindAndListen();
 	void handleNewClient(SOCKET socket);
 public:
 	Communicator();
 	~Communicator();
 	void startHandleRequests();
+	void bindAndListen();
 };
 
