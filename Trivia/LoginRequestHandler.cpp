@@ -12,10 +12,14 @@ bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
 RequestResult LoginRequestHandler::handleRequest(RequestInfo requestinfo)
 {
 	RequestResult req;
-	LoginResponse res;
-	res.status = LOGIN_SUCCESS;
-	req.response = JsonResponsePacketSerializer::SerializeResponse(res);
-	req.newHandler = nullptr;
+	if (requestinfo.id == LOGIN)
+	{
+		req = this->login(requestinfo);
+	}
+	else if (requestinfo.id == SIGNUP)
+	{
+		req = this->signup(requestinfo);
+	}
 	return req;
 }
 
@@ -37,6 +41,6 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 	res.status = m_loginManager->signup(req.username, req.password, req.email);
 	RequestResult result;
 	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
-	result.newHandler = nullptr;
+	result.newHandler = m_handlerFactory->createLoginRequestHandler();
 	return result;
 }
