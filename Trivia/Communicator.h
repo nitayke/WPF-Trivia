@@ -6,6 +6,7 @@
 #include "HandlersStructs.h"
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
+#include "RequestHandlerFactory.h"
 
 #define PORT 2222
 

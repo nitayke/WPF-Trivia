@@ -1,7 +1,9 @@
 #include "LoginRequestHandler.h"
 
-LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* req, LoginManager* logM) : m_handlerFactory(req), m_loginManager(logM)
+LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory* req, LoginManager* logM)
 {
+	m_handlerFactory = req;
+	m_loginManager = logM;
 }
 
 bool LoginRequestHandler::isRequestRelevant(RequestInfo requestinfo)
@@ -42,5 +44,6 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 	RequestResult result;
 	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
 	result.newHandler = m_handlerFactory->createLoginRequestHandler();
+	
 	return result;
 }

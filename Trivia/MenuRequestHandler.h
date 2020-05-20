@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 class MenuRequestHandler
 {
 public:
@@ -11,4 +9,3 @@ public:
 private:
 
 };
-
