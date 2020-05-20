@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include "Communicator.h"
-#include "IDatabase.h"
+#include "RequestHandlerFactory.h"
+#include "SqliteDatabase.h"
 
 class Server
 {
@@ -11,5 +12,6 @@ private:
 	RequestHandlerFactory m_handlerFactory;
 	
 public:
+	Server();
 	void run();
 };

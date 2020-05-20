@@ -1,5 +1,22 @@
 ﻿#include "Communicator.h"
 
+Communicator::Communicator(RequestHandlerFactory* reqFactory)
+{
+	_socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (_socket == INVALID_SOCKET)
+		throw std::exception(__FUNCTION__ " - socket");
+	this->m_handlerFactory = reqFactory;
+}
+
+Communicator::~Communicator()
+{
+	try
+	{
+		::closesocket(_socket);
+	}
+	catch (...) {}
+}
+
 void Communicator::bindAndListen()
 {
     struct sockaddr_in sa = { 0 };
@@ -58,22 +75,6 @@ void Communicator::handleNewClient(SOCKET client_socket)
 	}
 }
 
-Communicator::Communicator()
-{
-	_socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	if (_socket == INVALID_SOCKET)
-		throw std::exception(__FUNCTION__ " - socket");
-}
-
-Communicator::~Communicator()
-{
-	try
-	{
-		::closesocket(_socket);
-	}
-	catch (...) {}
-}
-
 void Communicator::startHandleRequests()
 {
 	bindAndListen();
@@ -85,9 +86,8 @@ void Communicator::startHandleRequests()
 			throw std::exception(__FUNCTION__);
 
 		printf("Client accepted !\n");
-		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket,
-		new LoginRequestHandler(new RequestHandlerFactory(), new LoginManager())));
-		
+		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, 
+			m_handlerFactory->createLoginRequestHandler()));
 		std::thread tr(&Communicator::handleNewClient, this, client_socket);
 		tr.detach();
 	}

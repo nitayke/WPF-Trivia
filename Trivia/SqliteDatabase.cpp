@@ -1,5 +1,13 @@
 #include "SqliteDatabase.h"
 
+SqliteDatabase::SqliteDatabase()
+{
+	if (!this->open())
+	{
+		exit(EXIT_FAILURE);
+	}
+}
+
 int SqliteDatabase::callback1(void* data, int argc, char** argv, char** azColName)
 {
 	*(bool*)data = argc > 0;

@@ -16,10 +16,10 @@ private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET _socket;
 	RequestHandlerFactory* m_handlerFactory;
-
+	
 	void handleNewClient(SOCKET socket);
 public:
-	Communicator();
+	Communicator(RequestHandlerFactory* reqFactory);
 	~Communicator();
 	void startHandleRequests();
 	void bindAndListen();

@@ -1,5 +1,10 @@
 #include "LoginManager.h"
 
+LoginManager::LoginManager(IDatabase* db)
+{
+	m_database = db;
+}
+
 int LoginManager::signup(string username, string password, string email)
 {
 	if (!m_database->doesUserExist(username))

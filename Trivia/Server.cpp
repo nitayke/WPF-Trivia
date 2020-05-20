@@ -1,5 +1,11 @@
 #include "Server.h"
 
+Server::Server() : m_database(new SqliteDatabase()),
+	m_handlerFactory(LoginManager(m_database), m_database),
+	m_communicator(&m_handlerFactory)
+{
+}
+
 void Server::run()
 {
 	// create new thread for handling message

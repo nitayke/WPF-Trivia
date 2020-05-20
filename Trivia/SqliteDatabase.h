@@ -4,7 +4,7 @@
 #include <iostream>
 #include <io.h>
 
-class SqliteDatabase : public IDatabase 
+class SqliteDatabase : public IDatabase
 {
 private:
 	sqlite3* db;
@@ -13,6 +13,7 @@ private:
 	static int callback1(void* data, int argc, char** argv, char** azColName);
 	static int callback2(void* data, int argc, char** argv, char** azColName);
 public:
+	SqliteDatabase();
 	bool open();
 	void close();
 	bool doesUserExist(string username) override;
