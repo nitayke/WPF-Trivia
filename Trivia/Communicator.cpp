@@ -85,7 +85,7 @@ void Communicator::startHandleRequests()
 			throw std::exception(__FUNCTION__);
 
 		printf("Client accepted !\n");
-		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, new LoginRequestHandler()));
+		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, m_handlerFactory));
 		
 		std::thread tr(&Communicator::handleNewClient, this, client_socket);
 		tr.detach();

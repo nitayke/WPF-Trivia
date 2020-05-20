@@ -6,7 +6,6 @@
 
 
 class RequestHandlerFactory
-
 {
 public:
 	LoginRequestHandler* createLoginRequestHandler();
