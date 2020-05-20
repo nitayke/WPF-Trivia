@@ -44,6 +44,5 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 	RequestResult result;
 	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
 	result.newHandler = m_handlerFactory->createLoginRequestHandler();
-	
 	return result;
 }
