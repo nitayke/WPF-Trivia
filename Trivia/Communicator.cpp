@@ -56,20 +56,11 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		{
 			return;
 		}
-		LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(tmp);
-		result = handler->handleRequest(info);
+		info.buffer = tmp;
 		info.id = tmp[0];
-		for (int i = 0; i < 1024; i++)
-		{
-			buffer[i] = '\0';
-		}
-		int count = 0;
-		for (auto i : result.response)
-		{
-			buffer[count] = i;
-			count++;
-		}
-		if (send(client_socket, buffer, 5, 0) == INVALID_SOCKET) //change the object that we send
+		result = handler->handleRequest(info);
+		std::string strBuff(result.response.begin(), result.response.end());
+		if (send(client_socket, strBuff.c_str(), 5, 0) == INVALID_SOCKET) //change the object that we send
 			throw std::exception("Error while sending message to client");
 		m_clients[client_socket] = result.newHandler;
 	}
