@@ -2,10 +2,12 @@
 #include <map>
 #include <thread>
 #include <winsock2.h>
+#include <iostream>
 #include "LoginRequestHandler.h"
 #include "HandlersStructs.h"
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
+#include "RequestHandlerFactory.h"
 
 #define PORT 2222
 
@@ -14,12 +16,13 @@ class Communicator
 private:
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET _socket;
-
-	void bindAndListen();
+	RequestHandlerFactory* m_handlerFactory;
+	
 	void handleNewClient(SOCKET socket);
 public:
-	Communicator();
+	Communicator(RequestHandlerFactory* reqFactory);
 	~Communicator();
 	void startHandleRequests();
+	void bindAndListen();
 };
 

@@ -1,5 +1,13 @@
 #include "SqliteDatabase.h"
 
+SqliteDatabase::SqliteDatabase()
+{
+	if (!this->open())
+	{
+		exit(EXIT_FAILURE);
+	}
+}
+
 int SqliteDatabase::callback1(void* data, int argc, char** argv, char** azColName)
 {
 	*(bool*)data = argc > 0;
@@ -27,7 +35,7 @@ bool SqliteDatabase::open()
 		return true;
 	}
 
-	const char* sqlStatement = "CREATE TABLE USER (USERNAME INTEGER PRIMARY "
+	const char* sqlStatement = "CREATE TABLE USER (USERNAME TEXT PRIMARY "
 		"KEY NOT NULL, PASSWORD "
 		"TEXT NOT NULL, EMAIL TEXT NOT NULL); ";
 
@@ -45,7 +53,7 @@ void SqliteDatabase::close()
 
 bool SqliteDatabase::doesUserExist(string username)
 {
-	bool exists;
+	bool exists = false;
 	char* errMessage = nullptr;
 	string sqlStatement = "SELECT * FROM USER WHERE username=\"" + username + "\";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback1, &exists, &errMessage);
@@ -64,7 +72,7 @@ bool SqliteDatabase::doesPasswordMatch(string username, string password)
 void SqliteDatabase::addNewUser(string username, string password, string email)
 {
 	char* errMessage = nullptr;
-	string sqlStatement = "INSERT INTO USER VALUES (" + username + ", "
-		+ password + ", " + email + ");";
+	string sqlStatement = "INSERT INTO USER VALUES (\"" + username + "\", \""
+		+ password + "\", \"" + email + "\");";
 	sqlite3_exec(db, sqlStatement.c_str(), nullptr, nullptr, &errMessage);
 }
