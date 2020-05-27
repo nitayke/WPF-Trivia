@@ -43,26 +43,32 @@ void Communicator::handleNewClient(SOCKET client_socket)
 	while (true)
 	{
 		int res = recv(client_socket, buffer, 1024, 0);
+		if (buffer[4] == '\0')
+			return;
 		if (res == INVALID_SOCKET)
 		{
 			throw std::exception("Error while recieving from socket");
 		}
 		time(&info.receivalTime);
-		for (size_t i = 0; i < 1024 && buffer[i] != '\0'; i++)
+		for (size_t i = 0; i < 1024; i++)
 		{
 			tmp.push_back((byte)buffer[i]);
 		}
+		info.buffer = tmp;
+		info.id = tmp[0];
 		if (!handler->isRequestRelevant(info))
 		{
 			return;
 		}
-		info.buffer = tmp;
-		info.id = tmp[0];
 		result = handler->handleRequest(info);
 		std::string strBuff(result.response.begin(), result.response.end());
-		if (send(client_socket, strBuff.c_str(), 5, 0) == INVALID_SOCKET) //change the object that we send
+		std::cout << "Sending: " << strBuff << std::endl;
+		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET) //change the object that we send
 			throw std::exception("Error while sending message to client");
 		m_clients[client_socket] = result.newHandler;
+		for (int i = 0; i < 1024; i++) // reset the buffer
+			buffer[i] = '\0';
+		tmp = Buffer();
 	}
 }
 

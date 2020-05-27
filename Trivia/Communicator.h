@@ -2,6 +2,7 @@
 #include <map>
 #include <thread>
 #include <winsock2.h>
+#include <iostream>
 #include "LoginRequestHandler.h"
 #include "HandlersStructs.h"
 #include "JsonRequestPacketDeserializer.h"
