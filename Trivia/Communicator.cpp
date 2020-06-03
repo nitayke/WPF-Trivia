@@ -68,7 +68,7 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		m_clients[client_socket] = result.newHandler;
 		for (int i = 0; i < 1024; i++) // reset the buffer
 			buffer[i] = '\0';
-		tmp = Buffer();
+		tmp.clear();
 	}
 }
 
