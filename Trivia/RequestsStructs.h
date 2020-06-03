@@ -35,5 +35,10 @@ struct CreateRoomRequest
 enum Codes
 {
 	LOGIN,
-	SIGNUP
+	SIGNUP,
+	ERROR,
+	LOGOUT,
+	GETROOMS,
+	JOINROOM,
+	CREATEROOM
 };
