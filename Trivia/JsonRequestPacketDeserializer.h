@@ -8,4 +8,7 @@ class JsonRequestPacketDeserializer
 public:
 	static LoginRequest deserializeLoginRequest(Buffer buf);
 	static SignupRequest deserializeSignupRequest(Buffer buf);
+	static GetPlayersInRoomRequest deserializeGetPlayersInRoomRequest(Buffer buf);
+	static JoinRoomRequest deserializeJoinRoomRequest(Buffer buf);
+	static CreateRoomRequest deserializeCreateRoomRequest(Buffer buf);
 };
