@@ -153,6 +153,7 @@
     <ClInclude Include="ResponsesStructs.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="RoomData.h" />
+    <ClInclude Include="RoomManager.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="SqliteDatabase.h" />
