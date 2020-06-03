@@ -3,8 +3,7 @@
 class MenuRequestHandler
 {
 public:
-	MenuRequestHandler();
-	~MenuRequestHandler();
+
 
 private:
 
