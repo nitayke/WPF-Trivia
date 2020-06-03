@@ -34,3 +34,54 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(Buffer buf
 
 	return req;
 }
+
+GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersInRoomRequest(Buffer buf)
+{
+	int size = buf.size();
+	string strMsg = "";
+	json msg;
+	GetPlayersInRoomRequest req;
+	for (int i = 5; i < size; i++)
+	{
+		strMsg += (char)buf[i];
+	}
+	msg = json::parse(strMsg);
+	req.roomId = msg["roomId"];
+
+	return req;
+}
+
+JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(Buffer buf)
+{
+	int size = buf.size();
+	string strMsg = "";
+	json msg;
+	JoinRoomRequest req;
+	for (int i = 5; i < size; i++)
+	{
+		strMsg += (char)buf[i];
+	}
+	msg = json::parse(strMsg);
+	req.roomId = msg["roomId"];
+
+	return req;
+}
+
+CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(Buffer buf)
+{
+	int size = buf.size();
+	string strMsg = "";
+	json msg;
+	CreateRoomRequest req;
+	for (int i = 5; i < size; i++)
+	{
+		strMsg += (char)buf[i];
+	}
+	msg = json::parse(strMsg);
+	req.roomName = msg["roomName"];
+	req.maxUsers = msg["maxUsers"];
+	req.questionCount = msg["questionCount"];
+	req.answerTimeout = msg["AnswerTimeout"];
+
+	return req;
+}
