@@ -6,6 +6,7 @@
 class JsonResponsePacketSerializer
 {
 private:
+	static Buffer SerializeRegularResponse(Codes code, unsigned int status);
 	static Buffer getLengthBuffer(string jsonMsg);
 public:
 	static Buffer SerializeResponse(ErrorResponse response);
