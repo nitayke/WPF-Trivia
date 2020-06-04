@@ -76,3 +76,23 @@ void SqliteDatabase::addNewUser(string username, string password, string email)
 		+ password + "\", \"" + email + "\");";
 	sqlite3_exec(db, sqlStatement.c_str(), nullptr, nullptr, &errMessage);
 }
+
+float SqliteDatabase::playerAverageAnswerTime(string ans)
+{
+	return 0.0f;
+}
+
+int SqliteDatabase::getNumOfCorrectAnswers(string)
+{
+	return 0;
+}
+
+int SqliteDatabase::getNumOfTotalAnswers(string)
+{
+	return 0;
+}
+
+int SqliteDatabase::getNumOfPlayerGames(string)
+{
+	return 0;
+}
