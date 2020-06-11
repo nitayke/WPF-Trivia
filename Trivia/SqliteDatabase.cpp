@@ -142,6 +142,15 @@ int SqliteDatabase::getNumOfPlayerGames(string username)
 	return int(numGames);
 }
 
+std::vector<string> SqliteDatabase::getPlayers()
+{
+	std::vector<string> players;
+	char* errMessage = nullptr;
+	string sqlStatement = "select USERNAME from user;";
+	sqlite3_exec(db, sqlStatement.c_str(), callback4, &players, &errMessage);
+	return players;
+}
+
 std::vector<string> SqliteDatabase::getQuestions()
 {
 	std::vector<string> questions;

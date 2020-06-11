@@ -50,8 +50,8 @@ RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 {
 	GetRoomsResponse res;
-	res.rooms = m_roomManager.getRooms();
 	RequestResult result;
+	res.rooms = m_roomManager.getRooms();
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	return result;
 }
@@ -64,8 +64,9 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 RequestResult MenuRequestHandler::getStatistics(RequestInfo requestInfo)
 {
 	getStatisticsResponse res;
-	res.statistics = m_statisticsManager.getStatistics();
 	RequestResult result;
+	res.status = 1;
+	res.statistics = m_statisticsManager.getStatistics();
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	return result;
 }

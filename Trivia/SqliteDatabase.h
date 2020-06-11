@@ -21,9 +21,10 @@ public:
 	bool doesUserExist(string username) override;
 	bool doesPasswordMatch(string username, string password) override;
 	void addNewUser(string username, string password, string email) override;
-	float playerAverageAnswerTime(string ans)override;
-	int getNumOfCorrectAnswers(string) override;
-	int getNumOfTotalAnswers(string) override;
-	int getNumOfPlayerGames(string) override;
-	std::vector<string> getQuestions() override; // should get int
+	float playerAverageAnswerTime(string username) override;
+	int getNumOfCorrectAnswers(string username) override;
+	int getNumOfTotalAnswers(string username) override;
+	int getNumOfPlayerGames(string username) override;
+	std::vector<string> getPlayers() override;
+	std::vector<string> getQuestions() override; // should get int maybe
 };

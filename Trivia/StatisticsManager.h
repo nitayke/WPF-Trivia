@@ -1,6 +1,7 @@
 #pragma once
 #include "IDatabase.h"
 #include <vector>
+#include <map>
 
 class StatisticsManager
 {
