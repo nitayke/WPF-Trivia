@@ -68,7 +68,7 @@ bool SqliteDatabase::open()
 		" USER TEXT NOT NULL"
 		");";
 
-	char* errMessage = nullptr;
+	errMessage = nullptr;
 	res = sqlite3_exec(db, sqlStatement, nullptr, nullptr, &errMessage);
 	if (res != SQLITE_OK || errMessage != nullptr)
 		return false;

@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 #include "RoomData.h"
+#include <vector>
+
+using std::string;
 
 struct LoginResponse
 {

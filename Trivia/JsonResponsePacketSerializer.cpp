@@ -37,7 +37,7 @@ Buffer JsonResponsePacketSerializer::serializeResponse(ErrorResponse response)
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;
-	responseBuffer.push_back(ERROR);
+	responseBuffer.push_back(ERRORCODE);
 	for (auto i : getLengthBuffer(strMsg))
 	{
 		responseBuffer.push_back(i);

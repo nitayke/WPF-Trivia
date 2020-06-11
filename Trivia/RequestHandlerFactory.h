@@ -6,7 +6,10 @@
 #include "StatisticsManager.h"
 #include "MenuRequestHandler.h"
 
+#include <vector>
+
 class LoginRequestHandler;
+class MenuRequestHandler;
 
 class RequestHandlerFactory
 {

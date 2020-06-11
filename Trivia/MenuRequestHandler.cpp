@@ -44,7 +44,12 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 
 RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 {
-	return RequestResult();
+	LogoutResponse res;
+	RequestResult result;
+	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr;
+	return result;
 }
 
 RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
@@ -52,6 +57,7 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 	GetRoomsResponse res;
 	RequestResult result;
 	res.rooms = m_roomManager.getRooms();
+	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	return result;
 }
@@ -59,10 +65,20 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 {
 	GetPlayersInRoomRequest req = JsonRequestPacketDeserializer::deserializeGetPlayersInRoomRequest(requestInfo.buffer);
-	GetPlayersInRoomResponse res; 
+	GetPlayersInRoomResponse res;
+	RequestResult result;
 	std::vector<RoomData> rooms = m_roomManager.getRooms();
-	//countinue
-	return ;
+	for (auto i : rooms)
+	{
+		if (i.id == req.roomId)
+		{
+			res.players = m_roomManager.getRoom(i.id).getAllUsers();
+			break;
+		}
+	}
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr; // TODO: fix that
+	return result;
 }
 
 RequestResult MenuRequestHandler::getStatistics(RequestInfo requestInfo)
@@ -72,16 +88,18 @@ RequestResult MenuRequestHandler::getStatistics(RequestInfo requestInfo)
 	res.status = 1;
 	res.statistics = m_statisticsManager.getStatistics();
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr; // fix that
 	return result;
 }
 
 RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 {
 	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
+	RequestResult result;
 	JoinRoomResponse res; // need to be fixed
 	res.status = 1;
-	RequestResult result;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr; // same
 	return result;
 }
 
