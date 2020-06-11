@@ -108,23 +108,27 @@ float SqliteDatabase::playerAverageAnswerTime(string username)
 
 int SqliteDatabase::getNumOfCorrectAnswers(string username)
 {
-	float avgTime;
+	float correctAnswers;
 	char* errMessage = nullptr;
 	string sqlStatement = "SELECT SUM(right) FROM STATISTICS WHERE USER=" + username + ";";
-	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
-	return int(avgTime);
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &correctAnswers, &errMessage);
+	return int(correctAnswers);
 }
 
 int SqliteDatabase::getNumOfTotalAnswers(string username)
 {
-	float avgTime;
+	float totalAnswers;
 	char* errMessage = nullptr;
 	string sqlStatement = "SELECT COUNT(right) FROM STATISTICS WHERE USER=" + username + ";";
-	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
-	return int(avgTime);
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &totalAnswers, &errMessage);
+	return int(totalAnswers);
 }
 
-int SqliteDatabase::getNumOfPlayerGames(string)
+int SqliteDatabase::getNumOfPlayerGames(string username)
 {
-	return 0;
+	float numGames;
+	char* errMessage = nullptr;
+	string sqlStatement = "SELECT COUNT(DISTINCT game_id) FROM STATISTICS WHERE USER=" + username + ";";
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &numGames, &errMessage);
+	return int(numGames);
 }
