@@ -32,7 +32,7 @@ RequestResult LoginRequestHandler::login(RequestInfo requestinfo)
 	res.status = m_loginManager->login(req.username, req.password);
 	RequestResult result;
 	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
-	result.newHandler = nullptr;
+	result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
 	return result;
 }
 

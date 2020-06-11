@@ -11,10 +11,10 @@ class LoginRequestHandler;
 class RequestHandlerFactory
 {
 public:
-	RequestHandlerFactory(LoginManager, IDatabase*);
+	RequestHandlerFactory(LoginManager, IDatabase*, RoomManager, StatisticsManager);
 	LoginRequestHandler* createLoginRequestHandler();
 	LoginManager& getLoginManager();
-	MenuRequestHandler* createMenuRequestHandler();
+	MenuRequestHandler* createMenuRequestHandler(LoggedUser);
 	StatisticsManager& getStatisticsManager();
 	RoomManager& getRoomManager();
 

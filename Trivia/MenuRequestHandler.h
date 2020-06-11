@@ -5,6 +5,7 @@
 class MenuRequestHandler : public IRequestHandler
 {
 public:
+	MenuRequestHandler(RequestHandlerFactory& req, RoomManager& roomMngr, StatisticsManager& statMngr, LoggedUser user);
 	bool isRequestRelevant(RequestInfo);
 	RequestResult handleRequest(RequestInfo);
 
