@@ -17,9 +17,15 @@ private:
 	RequestResult joinRoom(RequestInfo);
 	RequestResult createRoom(RequestInfo);
 
-
+	int m_id = 0;
 	LoggedUser m_user;
 	RoomManager& m_roomManager;
 	StatisticsManager& m_statisticsManager;
 	RequestHandlerFactory& m_handlerFactory;
+};
+
+enum IsActive
+{
+	NOT_ACTIVE,
+	ACTIVE
 };
