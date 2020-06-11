@@ -13,6 +13,7 @@ private:
 	static int callback1(void* data, int argc, char** argv, char** azColName);
 	static int callback2(void* data, int argc, char** argv, char** azColName);
 	static int callback3(void* data, int argc, char** argv, char** azColName);
+	static int callback4(void* data, int argc, char** argv, char** azColName);
 public:
 	SqliteDatabase();
 	bool open();
@@ -24,4 +25,5 @@ public:
 	int getNumOfCorrectAnswers(string) override;
 	int getNumOfTotalAnswers(string) override;
 	int getNumOfPlayerGames(string) override;
+	std::vector<string> getQuestions() override; // should get int
 };

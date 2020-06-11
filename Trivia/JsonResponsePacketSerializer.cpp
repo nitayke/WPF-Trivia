@@ -30,7 +30,7 @@ Buffer JsonResponsePacketSerializer::getLengthBuffer(string jsonMsg)
 	return responseBuffer;
 }
 
-Buffer JsonResponsePacketSerializer::SerializeResponse(ErrorResponse response)
+Buffer JsonResponsePacketSerializer::serializeResponse(ErrorResponse response)
 {
 	json msg;
 	msg["message"] = response.message;
@@ -49,12 +49,12 @@ Buffer JsonResponsePacketSerializer::SerializeResponse(ErrorResponse response)
 	return responseBuffer;
 }
 
-Buffer JsonResponsePacketSerializer::SerializeResponse(LoginResponse response)
+Buffer JsonResponsePacketSerializer::serializeResponse(LoginResponse response)
 {
 	return SerializeRegularResponse(LOGIN, response.status);
 }
 
-Buffer JsonResponsePacketSerializer::SerializeResponse(SignupResponse response)
+Buffer JsonResponsePacketSerializer::serializeResponse(SignupResponse response)
 {
 	return SerializeRegularResponse(SIGNUP, response.status);
 }
@@ -89,7 +89,7 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomsResponse response
 	return responseBuffer;
 }
 
-Buffer JsonResponsePacketSerializer::serializerResponse(GetPlayersInRoomResponse response)
+Buffer JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse response)
 {
 	json msg;
 	string playersInRoom;

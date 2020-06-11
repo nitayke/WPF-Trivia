@@ -26,6 +26,15 @@ int SqliteDatabase::callback3(void* data, int argc, char** argv, char** azColNam
 	return 0;
 }
 
+int SqliteDatabase::callback4(void* data, int argc, char** argv, char** azColName)
+{
+	for (size_t i = 0; i < argc; i++)
+	{
+		(*(std::vector<string>*)data).push_back(string(argv[i]));
+	}
+	return 0;
+}
+
 bool SqliteDatabase::open()
 {
 	int doesFileExist = _access(dbFileName.c_str(), 0);
@@ -131,4 +140,13 @@ int SqliteDatabase::getNumOfPlayerGames(string username)
 	string sqlStatement = "SELECT COUNT(DISTINCT game_id) FROM STATISTICS WHERE USER=" + username + ";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback3, &numGames, &errMessage);
 	return int(numGames);
+}
+
+std::vector<string> SqliteDatabase::getQuestions()
+{
+	std::vector<string> questions;
+	char* errMessage = nullptr;
+	string sqlStatement = "SELECT QUESTION FROM QUESTIONS;";
+	sqlite3_exec(db, sqlStatement.c_str(), callback4, &questions, &errMessage);
+	return questions;
 }
