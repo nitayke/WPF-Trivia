@@ -6,9 +6,11 @@
 class Room
 {
 public:
+	Room(RoomData roomData);
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
 	std::vector<string> getAllUsers();
+	RoomData getRoomData();
 
 private:
 	RoomData m_metadata;
