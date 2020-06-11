@@ -20,6 +20,12 @@ int SqliteDatabase::callback2(void* data, int argc, char** argv, char** azColNam
 	return 0;
 }
 
+int SqliteDatabase::callback3(void* data, int argc, char** argv, char** azColName)
+{
+	*(float*)data = std::atof(argv[0]);
+	return 0;
+}
+
 bool SqliteDatabase::open()
 {
 	int doesFileExist = _access(dbFileName.c_str(), 0);
@@ -38,6 +44,20 @@ bool SqliteDatabase::open()
 	const char* sqlStatement = "CREATE TABLE USER (USERNAME TEXT PRIMARY "
 		"KEY NOT NULL, PASSWORD "
 		"TEXT NOT NULL, EMAIL TEXT NOT NULL); ";
+
+	char* errMessage = nullptr;
+	res = sqlite3_exec(db, sqlStatement, nullptr, nullptr, &errMessage);
+	if (res != SQLITE_OK || errMessage != nullptr)
+		return false;
+
+	sqlStatement = "CREATE TABLE STATISTICS ("
+		"ID	INTEGER PRIMARY KEY NOT NULL,"
+		" QUESTION_ID	INTEGER NOT NULL,"
+		" GAME_ID	INTEGER NOT NULL,"
+		" RIGHT	INTEGER NOT NULL,"
+		" TIME REAL NOT NULL,"
+		" USER TEXT NOT NULL"
+		");";
 
 	char* errMessage = nullptr;
 	res = sqlite3_exec(db, sqlStatement, nullptr, nullptr, &errMessage);
@@ -77,19 +97,31 @@ void SqliteDatabase::addNewUser(string username, string password, string email)
 	sqlite3_exec(db, sqlStatement.c_str(), nullptr, nullptr, &errMessage);
 }
 
-float SqliteDatabase::playerAverageAnswerTime(string ans)
+float SqliteDatabase::playerAverageAnswerTime(string username)
 {
-	return 0.0f;
+	float avgTime;
+	char* errMessage = nullptr;
+	string sqlStatement = "SELECT avg(time) FROM STATISTICS WHERE USER=" + username + ";";
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
+	return avgTime;
 }
 
-int SqliteDatabase::getNumOfCorrectAnswers(string)
+int SqliteDatabase::getNumOfCorrectAnswers(string username)
 {
-	return 0;
+	float avgTime;
+	char* errMessage = nullptr;
+	string sqlStatement = "SELECT SUM(right) FROM STATISTICS WHERE USER=" + username + ";";
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
+	return int(avgTime);
 }
 
-int SqliteDatabase::getNumOfTotalAnswers(string)
+int SqliteDatabase::getNumOfTotalAnswers(string username)
 {
-	return 0;
+	float avgTime;
+	char* errMessage = nullptr;
+	string sqlStatement = "SELECT COUNT(right) FROM STATISTICS WHERE USER=" + username + ";";
+	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
+	return int(avgTime);
 }
 
 int SqliteDatabase::getNumOfPlayerGames(string)

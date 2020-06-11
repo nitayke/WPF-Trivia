@@ -12,6 +12,7 @@ private:
 
 	static int callback1(void* data, int argc, char** argv, char** azColName);
 	static int callback2(void* data, int argc, char** argv, char** azColName);
+	static int callback3(void* data, int argc, char** argv, char** azColName);
 public:
 	SqliteDatabase();
 	bool open();
