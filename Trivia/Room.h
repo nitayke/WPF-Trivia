@@ -6,6 +6,7 @@
 class Room
 {
 public:
+	Room();
 	Room(RoomData roomData);
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);

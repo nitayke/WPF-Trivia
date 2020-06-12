@@ -1,8 +1,21 @@
 #include "Room.h"
 
+Room::Room() : m_users()
+{
+	m_metadata.id = 0;
+	m_metadata.isActive = 0;
+	m_metadata.maxPlayers = 5;
+	m_metadata.name = "";
+	m_metadata.timePerQuestion = 10;
+}
+
 Room::Room(RoomData roomData)
 {
-	m_metadata = roomData;
+	m_metadata.id = roomData.id;
+	m_metadata.isActive = roomData.isActive;
+	m_metadata.maxPlayers = roomData.maxPlayers;
+	m_metadata.name = roomData.name;
+	m_metadata.timePerQuestion = roomData.timePerQuestion;
 }
 
 void Room::addUser(LoggedUser user)
@@ -32,7 +45,7 @@ void Room::removeUser(LoggedUser user)
 std::vector<string> Room::getAllUsers()
 {
 	std::vector<string> allUsers;
-	for (int i = 0; i < m_users.size(); i++)
+	for (size_t i = 0; i < m_users.size(); i++)
 	{
 		allUsers.push_back(m_users[i].getUserName());
 	}

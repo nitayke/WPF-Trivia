@@ -63,7 +63,7 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		result = handler->handleRequest(info);
 		std::string strBuff(result.response.begin(), result.response.end());
 		std::cout << "Sending: " << strBuff << std::endl;
-		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET) //change the object that we send
+		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET)
 			throw std::exception("Error while sending message to client");
 		m_clients[client_socket] = result.newHandler;
 		for (int i = 0; i < 1024; i++) // reset the buffer
