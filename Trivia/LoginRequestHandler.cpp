@@ -31,8 +31,8 @@ RequestResult LoginRequestHandler::login(RequestInfo requestinfo)
 	LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(requestinfo.buffer);
 	res.status = m_loginManager->login(req.username, req.password);
 	RequestResult result;
-	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
-	result.newHandler = nullptr;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
 	return result;
 }
 
@@ -42,7 +42,7 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 	SignupRequest req = JsonRequestPacketDeserializer::deserializeSignupRequest(requestinfo.buffer);
 	res.status = m_loginManager->signup(req.username, req.password, req.email);
 	RequestResult result;
-	result.response = JsonResponsePacketSerializer::SerializeResponse(res);
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	result.newHandler = m_handlerFactory->createLoginRequestHandler();
 	return result;
 }
