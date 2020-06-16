@@ -38,11 +38,5 @@
             <Button Content="Best Scores" Height="60" Margin="10"/>
             <Button Content="Quit" Height="40" Width="200" Margin="10"/>
         </StackPanel>
-
-
-
-
-
-
     </Grid>
 </Window>
