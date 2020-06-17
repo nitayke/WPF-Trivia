@@ -46,7 +46,6 @@
                        Foreground="White"
                        HorizontalAlignment="Center"
                        Margin="10"/>
-            <Button Content="Back" Width="100" Height="30" Margin="20"/>
         </StackPanel>
 
     </Grid>
