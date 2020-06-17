@@ -79,7 +79,6 @@
                    FontSize="20"
                    Foreground="White" Margin="80 10 0 0"/>
             </StackPanel>
-            <Button Content="Back" Width="100" Height="30" Margin="60"/>
         </StackPanel>
 
     </Grid>
