@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Net;
-using System.Net.Sockets;
 
 namespace TriviaClient
 {
@@ -13,6 +11,12 @@ namespace TriviaClient
         public MainWindow()
         {
             InitializeComponent();
+            while (!Communicator.Connect("127.0.0.1", 2222))
+            {
+                MessageBoxResult result = MessageBox.Show("Can't connect to server! click OK to try again or Cancel.", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Cancel)
+                    Environment.Exit(0);
+            }
         }
         // exit
         private void Button_Click(object sender, RoutedEventArgs e)

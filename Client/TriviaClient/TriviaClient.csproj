@@ -58,12 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Communicator.cs" />
     <Compile Include="JoinRoom.xaml.cs">
       <DependentUpon>JoinRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyScore.xaml.cs">
       <DependentUpon>MyScore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Request.cs" />
     <Compile Include="signup.xaml.cs">
       <DependentUpon>signup.xaml</DependentUpon>
     </Compile>

@@ -31,7 +31,7 @@
 
 
 
-                <StackPanel Margin="-20 200 0 0" >
+                <StackPanel Margin="-20 150 0 0" >
             <StackPanel Orientation="Horizontal">
                 <TextBox FontFamily="Helvetica"
                              FontWeight="Light"
@@ -45,7 +45,9 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="200 0 0 0"/>
+                             Margin="200 0 0 0"
+                             x:Name="username"
+                         />
             </StackPanel>
 
 
@@ -63,12 +65,16 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="200 0 0 0"/>
+                             Margin="200 0 0 0"
+                             x:Name="password"/>
             </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                <Button Width="100" Height="40" Content="Login" Margin="200,0,60,0" />
+            <StackPanel Margin="0,50,100,0">
+                <Button Width="100" Height="40" Content="Login" Margin="200,50,60,0"
+                        Click="Button_Click_1"/>
+
+                <TextBlock x:Name="wrong_data" Margin="100 20 0 0" FontSize="16"/>
             </StackPanel>
 
                 </StackPanel>

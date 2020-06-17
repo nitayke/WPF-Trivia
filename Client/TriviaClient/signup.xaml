@@ -44,7 +44,8 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="200 0 0 0"/>
+                             Margin="200 0 0 0"
+                         x:Name="username"/>
             </StackPanel>
 
 
@@ -62,7 +63,8 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="200 0 0 0"/>
+                             Margin="200 0 0 0"
+                             x:Name="password"/>
             </StackPanel>
             
             
@@ -79,11 +81,14 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="200 0 0 0"/>
+                             Margin="200 0 0 0"
+                         x:Name="email"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                <Button Width="100" Height="40" Content="REGISTER" Margin="200 0"/>
+            <StackPanel Margin="-70,50,0,0">
+                <Button Width="100" Height="40" Content="Register" Margin="200 0"
+                        Click="Button_Click_1"/>
+                <TextBlock x:Name="wrong_data" Margin="200 20 0 0" FontSize="16"/>
             </StackPanel>
 
         </StackPanel>
