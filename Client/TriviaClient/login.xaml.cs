@@ -19,17 +19,18 @@ using System.Text.RegularExpressions;
 
 namespace TriviaClient
 {
-    public partial class CreateRoom : Window
+    public partial class login : Window
     {
-        public CreateRoom()
+        public login()
         {
             InitializeComponent();
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new MainWindow();
+            var window = new MainWindow();
             window.Show();
-            Close();
+            this.Close();
         }
     }
 }

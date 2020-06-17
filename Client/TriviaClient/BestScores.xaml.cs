@@ -19,9 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace TriviaClient
 {
-    public partial class CreateRoom : Window
+    public partial class BestScores : Window
     {
-        public CreateRoom()
+        public BestScores()
         {
             InitializeComponent();
         }

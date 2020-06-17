@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
-        Title="מסך יצירת חדר" Height="480" Width="600">
+        Title="מסך יצירת חדר" Height="450" Width="600">
     <Grid>
-
-
-        <Border CornerRadius="10" Margin="0,0,0,0">
+        <Border CornerRadius="10">
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#7be9f6" Offset="0.0"/>
@@ -18,7 +16,8 @@
             </Border.Background>
         </Border>
 
-
+        <Button Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Margin="20" Click="Button_Click"/>
         <StackPanel Margin="50">
             <TextBlock Text="צור חדר"
                            FontFamily="helvetica"
@@ -26,9 +25,7 @@
                            Foreground="White"
                            HorizontalAlignment="Center"/>
         </StackPanel>
-
-
-
+        
         <StackPanel Margin="-20 140 0 00" >
             <StackPanel Orientation="Horizontal">
                 <TextBox FontFamily="Helvetica"
@@ -49,18 +46,18 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                 <TextBox FontFamily="Helvetica"
-                             FontWeight="Light"
-                             Text="Number Of Questions"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="235"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="25"
-                             Margin="200 0 0 0"/>
+                         FontWeight="Light"
+                         Text="Number Of Questions"
+                         FontSize="20"
+                         HorizontalAlignment="Center"
+                         Foreground="White"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Width="235"
+                         HorizontalContentAlignment="Left"
+                         Opacity="0.5"
+                         Height="25"
+                         Margin="200 0 0 0"/>
             </StackPanel>
 
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4FE5EC43-82A2-485E-AD7E-11E7F5E9E7B0}</ProjectGuid>
+    <ProjectGuid>{8AA1A467-7C97-456F-8D54-95173662DC60}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TriviaClient</RootNamespace>
     <AssemblyName>TriviaClient</AssemblyName>
@@ -55,7 +55,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JoinRoom.xaml.cs">
+      <DependentUpon>JoinRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyScore.xaml.cs">
+      <DependentUpon>MyScore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="signup.xaml.cs">
+      <DependentUpon>signup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WaitingRoom.xaml.cs">
+      <DependentUpon>WaitingRoom.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AfterLogging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BestScores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CreateRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="JoinRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -67,18 +91,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AfterLogging.xaml.cs">
+      <DependentUpon>AfterLogging.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BestScores.xaml.cs">
+      <DependentUpon>BestScores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateRoom.xaml.cs">
       <DependentUpon>CreateRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="login.xaml.cs">
+      <DependentUpon>login.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MyScore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="signup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WaitingRoom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
