@@ -43,8 +43,8 @@ void Communicator::handleNewClient(SOCKET client_socket)
 	while (true)
 	{
 		int res = recv(client_socket, buffer, 1024, 0);
-		if (buffer[4] == '\0')
-			return;
+		if (buffer[0] == 0 && buffer[4] == 0)
+			exit(0);
 		if (res == INVALID_SOCKET)
 		{
 			throw std::exception("Error while recieving from socket");
@@ -56,11 +56,11 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		}
 		info.buffer = tmp;
 		info.id = tmp[0];
-		if (!handler->isRequestRelevant(info))
+		if (!m_clients[client_socket]->isRequestRelevant(info))
 		{
 			return;
 		}
-		result = handler->handleRequest(info);
+		result = m_clients[client_socket]->handleRequest(info);
 		std::string strBuff(result.response.begin(), result.response.end());
 		std::cout << "Sending: " << strBuff << std::endl;
 		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET)

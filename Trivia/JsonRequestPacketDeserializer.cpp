@@ -81,7 +81,7 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(Bu
 	req.roomName = msg["roomName"];
 	req.maxUsers = msg["maxUsers"];
 	req.questionCount = msg["questionCount"];
-	req.answerTimeout = msg["AnswerTimeout"];
+	req.answerTimeout = msg["answerTimeout"];
 
 	return req;
 }

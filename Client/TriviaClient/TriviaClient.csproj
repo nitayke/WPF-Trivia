@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8AA1A467-7C97-456F-8D54-95173662DC60}</ProjectGuid>
+    <ProjectGuid>{E7FC8DB8-B3C8-4FCD-91FA-F6153F8A4E22}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TriviaClient</RootNamespace>
     <AssemblyName>TriviaClient</AssemblyName>
@@ -58,13 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Communicator.cs" />
-    <Compile Include="JoinRoom.xaml.cs">
-      <DependentUpon>JoinRoom.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MyScore.xaml.cs">
-      <DependentUpon>MyScore.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Request.cs" />
     <Compile Include="signup.xaml.cs">
       <DependentUpon>signup.xaml</DependentUpon>
@@ -85,8 +78,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="JoinRoom.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="login.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,8 +99,12 @@
     <Compile Include="BestScores.xaml.cs">
       <DependentUpon>BestScores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Communicator.cs" />
     <Compile Include="CreateRoom.xaml.cs">
       <DependentUpon>CreateRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JoinRoom.xaml.cs">
+      <DependentUpon>JoinRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
@@ -130,6 +127,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyScore.xaml.cs">
+      <DependentUpon>MyScore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

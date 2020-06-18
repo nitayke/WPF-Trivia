@@ -12,7 +12,8 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == JOINROOM ||
 		requestInfo.id == CREATEROOM ||
 		requestInfo.id == GETPLAYERSINROOM ||
-		requestInfo.id == GETSTATISTICS;
+		requestInfo.id == GETSTATISTICS ||
+		requestInfo.id == CLOSEROOM;
 }
 
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
@@ -36,7 +37,10 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 		req = this->getStatistics(requestInfo);
 		break;
 	case LOGOUT:
-		this->signout(requestInfo);
+		req = this->signout(requestInfo);
+		break;
+	case CLOSEROOM:
+		req = this->closeRoom(requestInfo);
 		break;
 	}
 	return req;
@@ -48,7 +52,7 @@ RequestResult MenuRequestHandler::signout(RequestInfo requestInfo)
 	RequestResult result;
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr;
+	result.newHandler = m_handlerFactory.createLoginRequestHandler(m_user.getUserName());
 	return result;
 }
 
@@ -58,6 +62,7 @@ RequestResult MenuRequestHandler::getRooms(RequestInfo requestInfo)
 	RequestResult result;
 	res.rooms = m_roomManager.getRooms();
 	res.status = 1;
+	result.newHandler = this;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	return result;
 }
@@ -77,7 +82,7 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 		}
 	}
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr; // TODO: fix that
+	result.newHandler = this;
 	return result;
 }
 
@@ -88,7 +93,7 @@ RequestResult MenuRequestHandler::getStatistics(RequestInfo requestInfo)
 	res.status = 1;
 	res.statistics = m_statisticsManager.getStatistics();
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr; // fix that
+	result.newHandler = this;
 	return result;
 }
 
@@ -96,10 +101,10 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 {
 	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
 	RequestResult result;
-	JoinRoomResponse res; // need to be fixed
+	JoinRoomResponse res;
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr; // same
+	result.newHandler = nullptr; // need to be fixed
 	return result;
 }
 
@@ -114,9 +119,22 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	room.isActive = ACTIVE;
 	m_roomManager.createRoom(m_user, room);
 	CreateRoomResponse CRes;
+	CRes.roomId = m_id;
 	CRes.status = 1;
 	RequestResult res;
 	res.response = JsonResponsePacketSerializer::serializeResponse(CRes);
-	res.newHandler = nullptr; //TODO: fix this handler.
+	res.newHandler = this; //TODO: fix this handler.
 	return res;
+}
+
+RequestResult MenuRequestHandler::closeRoom(RequestInfo requestInfo)
+{
+	LogoutResponse res;
+	RequestResult result;
+	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
+	m_roomManager.deleteRoom(req.roomId); // fix this
+	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = this;
+	return result;
 }

@@ -6,11 +6,11 @@ namespace TriviaClient
     static class Communicator
     {
         public static Socket serverSocket;
-
+        public static int roomId;
         public static bool Connect(string serverIP, int port)
         {
             Socket sock = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            IPAddress iP = System.Net.IPAddress.Parse(serverIP);
+            IPAddress iP = IPAddress.Parse(serverIP);
             IPEndPoint iPEndPoint = new IPEndPoint(iP, port);
             try
             {

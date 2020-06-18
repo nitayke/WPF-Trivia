@@ -13,4 +13,20 @@ namespace TriviaClient
         public string password;
         public string email;
     }
+    class CreateRoomRequest
+    {
+        public string roomName;
+        public int maxUsers;
+        public int questionCount;
+        public int answerTimeout;
+    }
+    class JoinRoomRequest
+    {
+        public int roomId;
+    }
+    class CreateRoomResponse
+    {
+        public int roomId;
+        public int status;
+    }
 }

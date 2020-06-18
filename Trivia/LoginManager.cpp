@@ -45,11 +45,17 @@ int LoginManager::login(string username, string password)
 
 void LoginManager::logout(string username)
 {
-	for (auto i = m_loggedUsers.begin(); i != m_loggedUsers.end(); i++)
+	for (std::vector<LoggedUser>::iterator i = m_loggedUsers.begin(); i != m_loggedUsers.end(); i++)
 	{
 		if ((*i).getUserName() == username)
 		{
-			m_loggedUsers.erase(i);
+			if (m_loggedUsers.size() == 1)
+			{
+				m_loggedUsers.clear();
+			}
+			else
+				m_loggedUsers.erase(i);
+			return;
 		}
 	}
 }

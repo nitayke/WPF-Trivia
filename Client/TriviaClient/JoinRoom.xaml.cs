@@ -14,7 +14,7 @@ namespace TriviaClient
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new MainWindow();
+            Window window = new AfterLogging();
             window.Show();
             Close();
         }

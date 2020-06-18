@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
-        Title="תפריט" Height="800" Width="600">
+        Title="תפריט" Height="600" Width="600">
     <Grid>
 
         <Border CornerRadius="10" Grid.RowSpan="2">
@@ -25,13 +25,13 @@
                            HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Margin="80 150 80 0">
-            <Button Content="Sign Out" Height="60" Margin="10 100 10 10"/>
-            <Button Content="Join Room" Height="60" Margin="10"/>
-            <Button Content="Create Room" Height="60" Margin="10"/>
-            <Button Content="My Status" Height="60" Margin="10"/>
-            <Button Content="Best Scores" Height="60" Margin="10"/>
-            <Button Content="Quit" Height="40" Width="200" Margin="10"/>
+        <StackPanel Margin="80 50 80 0">
+            <Button Content="Sign Out" Height="50" Margin="10 100 10 10" Click="Button_Click_4"/>
+            <Button Content="Join Room" Height="50" Margin="10" Click="Button_Click"/>
+            <Button Content="Create Room" Height="50" Margin="10" Click="Button_Click_1"/>
+            <Button Content="My Status" Height="50" Margin="10" Click="Button_Click_2"/>
+            <Button Content="Best Scores" Height="50" Margin="10" Click="Button_Click_3"/>
+            <Button Content="Quit" Height="40" Width="200" Margin="10" Click="Button_Click_5"/>
         </StackPanel>
 
     </Grid>

@@ -11,6 +11,12 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 	return new LoginRequestHandler(this, &m_loginManager);
 }
 
+LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler(string loggedOutUser)
+{
+	m_loginManager.logout(loggedOutUser);
+	return new LoginRequestHandler(this, &m_loginManager);
+}
+
 LoginManager& RequestHandlerFactory::getLoginManager()
 {
 	return m_loginManager;

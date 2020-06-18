@@ -93,6 +93,7 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse 
 {
 	json msg;
 	string playersInRoom;
+	Buffer responseBuffer;
 	for (auto i : response.players)
 	{
 		playersInRoom += i + ", ";
@@ -101,7 +102,6 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse 
 	msg["PlayersInRoom"] = playersInRoom;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
-	Buffer responseBuffer;
 	responseBuffer.push_back(GETROOMS);
 	for (auto i : getLengthBuffer(strMsg))
 	{
@@ -121,7 +121,20 @@ Buffer JsonResponsePacketSerializer::serializeResponse(JoinRoomResponse response
 
 Buffer JsonResponsePacketSerializer::serializeResponse(CreateRoomResponse response)
 {
-	return SerializeRegularResponse(CREATEROOM, response.status);
+	json msg;
+	msg["status"] = response.status;
+	msg["roomId"] = response.roomId;
+	Buffer responseBuffer;
+	string strMsg = msg.dump();
+	for (auto i : getLengthBuffer(strMsg))
+	{
+		responseBuffer.push_back(i);
+	}
+	for (auto i : strMsg)
+	{
+		responseBuffer.push_back((byte)i);
+	}
+	return responseBuffer;
 }
 
 Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse response)

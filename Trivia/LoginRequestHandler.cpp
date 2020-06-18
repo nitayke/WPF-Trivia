@@ -29,10 +29,13 @@ RequestResult LoginRequestHandler::login(RequestInfo requestinfo)
 {
 	LoginResponse res;
 	LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(requestinfo.buffer);
-	res.status = m_loginManager->login(req.username, req.password);
 	RequestResult result;
+	res.status = m_loginManager->login(req.username, req.password);
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
+	if (res.status == LOGIN_SUCCESS)
+		result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
+	else
+		result.newHandler = this;
 	return result;
 }
 
@@ -40,9 +43,12 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 {
 	SignupResponse res;
 	SignupRequest req = JsonRequestPacketDeserializer::deserializeSignupRequest(requestinfo.buffer);
-	res.status = m_loginManager->signup(req.username, req.password, req.email);
 	RequestResult result;
+	res.status = m_loginManager->signup(req.username, req.password, req.email);
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = m_handlerFactory->createLoginRequestHandler();
+	if (res.status == SIGNUP_SUCCESS)
+		result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
+	else
+		result.newHandler = this;
 	return result;
 }
