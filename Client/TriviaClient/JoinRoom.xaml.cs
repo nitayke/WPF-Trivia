@@ -1,22 +1,22 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TriviaClient
 {
     /// <summary>
     /// Interaction logic for JoinRoom.xaml
     /// </summary>
-    public partial class JoinRoom : Window
+    public partial class JoinRoom : Page
     {
+        // TODO: MainWindow.openedRoom = true;
         public JoinRoom()
         {
             InitializeComponent();
         }
+        // back
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new AfterLogging();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new AfterLogging());
         }
     }
 }

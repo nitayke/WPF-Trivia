@@ -1,24 +1,31 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Newtonsoft.Json;
 
 namespace TriviaClient
 {
-    public partial class login : Window
+    /// <summary>
+    /// Interaction logic for Login.xaml
+    /// </summary>
+    public partial class Login : Page
     {
-        public login()
+        public Login()
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void username_GotFocus(object sender, RoutedEventArgs e)
         {
-            var window = new MainWindow();
-            window.Show();
-            this.Close();
+            ((TextBox)sender).Text = "";
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+
+        private void password_GotFocus(object sender, RoutedEventArgs e)
         {
-            var window = new AfterLogging();
+            ((PasswordBox)sender).Password = "";
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
             LoginRequest request = new LoginRequest();
             request.username = username.Text;
             request.password = password.Password;
@@ -35,10 +42,15 @@ namespace TriviaClient
                     wrong_data.Text = "User already connected! Please try again.";
                     break;
                 default:
-                    window.Show();
-                    Close();
+                    MainWindow.isLoggedIn = true;
+                    NavigationService.Navigate(new AfterLogging());
                     break;
             }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

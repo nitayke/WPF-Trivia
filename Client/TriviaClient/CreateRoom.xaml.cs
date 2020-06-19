@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using Newtonsoft.Json;
 
 namespace TriviaClient
 {
-    public partial class CreateRoom : Window
+    public partial class CreateRoom : Page
     {
         public CreateRoom()
         {
             InitializeComponent();
         }
+        // back
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new AfterLogging();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new AfterLogging());
         }
+        // create room
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
@@ -29,7 +30,6 @@ namespace TriviaClient
                 error.Text = "Wrong input! Please try again.";
                 return;
             }
-            Window window = new WaitingRoom();
             CreateRoomRequest request = new CreateRoomRequest
             {
                 answerTimeout = int.Parse(time.Text),
@@ -42,8 +42,11 @@ namespace TriviaClient
             string subStr = ans.Substring(4, 23);
             response = JsonConvert.DeserializeObject<CreateRoomResponse>(subStr);
             Communicator.roomId = response.roomId;
-            window.Show();
-            Close();
+            NavigationService.Navigate(new WaitingRoom());
+        }
+        private void GotFocusTextBox(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = "";
         }
     }
 }

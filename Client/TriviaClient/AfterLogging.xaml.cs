@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TriviaClient
 {
-    public partial class AfterLogging : Window
+    public partial class AfterLogging : Page
     {
         public AfterLogging()
         {
@@ -12,44 +12,34 @@ namespace TriviaClient
         // join room
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new JoinRoom();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new JoinRoom());
         }
         // create room
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Window window = new CreateRoom();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new CreateRoom());
         }
         // my status
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Window window = new MyScore();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new MyScore());
         }
         // best scores
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            Window window = new BestScores();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new BestScores());
         }
         // sign out
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Window window = new MainWindow(true);
             Communicator.Send("", 3);
-            window.Show();
-            Close();
+            NavigationService.Navigate(new Menu());
         }
         // quit
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             Communicator.Send("", 3);
-            Close();
+            // Environment.Exit() ?
         }
     }
 }

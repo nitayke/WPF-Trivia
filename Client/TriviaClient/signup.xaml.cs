@@ -1,38 +1,35 @@
-﻿using Newtonsoft.Json;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TriviaClient
 {
-    public partial class signup : Window
+    /// <summary>
+    /// Interaction logic for Signup.xaml
+    /// </summary>
+    public partial class Signup : Page
     {
-        public signup()
+        public Signup()
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void username_GotFocus(object sender, RoutedEventArgs e)
         {
-            var window = new MainWindow();
-            window.Show();
-            Close();
+            ((TextBox)sender).Text = "";
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+
+        private void password_GotFocus(object sender, RoutedEventArgs e)
         {
-            var window = new AfterLogging();
-            SignupRequest request = new SignupRequest();
-            request.username = username.Text;
-            request.password = password.Password;
-            request.email = email.Text;
-            string answer = Communicator.Send(JsonConvert.SerializeObject(request), 1);
-            switch (answer[15])
-            {
-                case '1':
-                    wrong_data.Text = "Username exists! Please try again.";
-                    break;
-                default:
-                    window.Show();
-                    Close();
-                    break;
-            }
+            ((PasswordBox)sender).Password = "";
+        }
+
+        private void email_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = "";
+        }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Menu());
         }
     }
 }

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TriviaClient
 {
-    public partial class BestScores : Window
+    public partial class BestScores : Page
     {
         public BestScores()
         {
             InitializeComponent();
         }
+        // back
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new AfterLogging();
-            window.Show();
-            Close();
+            NavigationService.Navigate(new AfterLogging());
         }
     }
 }

@@ -5,40 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
         mc:Ignorable="d"
-        Title="תפריט" Height="400" Width="400">
-    <Grid>
+        Title="טריוויה"
+        Width="500"
+        Height="650"
+        Closing="Window_Closing">
+    <Frame x:Name="frame" NavigationUIVisibility="Hidden"></Frame>
+    
 
-
-        <Border CornerRadius="10" Grid.RowSpan="2">
-            <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="#7be9f6" Offset="0.0"/>
-                    <GradientStop Color="#f083da" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-
-
-        <StackPanel Margin="50">
-            <TextBlock Text="תפריט"
-                           FontFamily="helvetica"
-                           FontSize="50"
-                           Foreground="White"
-                           HorizontalAlignment="Center"/>
-        </StackPanel>
-
-
-
-        <StackPanel Margin="80 120 80 0">
-            <Button Content="Login" Height="40" Margin="10" Click="Button_Click_1"/>
-            <Button Content="Sign Up" Height="40" Margin="10" Click="Button_Click_2"/>
-            <Button Content="Quit" Height="40" Width="200" Margin="10" Click="Button_Click"/>
-        </StackPanel>
-
-
-
-
-
-
-    </Grid>
 </Window>

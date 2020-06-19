@@ -1,5 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using Newtonsoft.Json;
+using System;
 
 namespace TriviaClient
 {
@@ -8,38 +9,35 @@ namespace TriviaClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static bool isLoggedIn;
+        public static bool openedRoom;
         public MainWindow()
         {
             InitializeComponent();
+            isLoggedIn = false;
+            openedRoom = false;
             while (!Communicator.Connect("127.0.0.1", 2222))
             {
-                MessageBoxResult result = MessageBox.Show("Can't connect to server! click OK to try again or Cancel.", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Can't connect to server! Please click OK to try again or Cancel to cancel.",
+                    "Connection Problem", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Cancel)
                     Environment.Exit(0);
             }
+            frame.NavigationService.Navigate(new Menu());
         }
-        public MainWindow(bool firstTime)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            InitializeComponent();
-        }
-        // exit
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-        // login
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Window window = new login();
-            window.Show();
-            Close();
-        }
-        // signup
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Window window = new signup();
-            window.Show();
-            Close();
+            if (openedRoom) // then close the room
+            {
+                JoinRoomRequest joinRoomRequest = new JoinRoomRequest
+                {
+                    roomId = Communicator.roomId
+                };
+                string req = JsonConvert.SerializeObject(joinRoomRequest);
+                Communicator.Send(req, 9);
+            }
+            if (isLoggedIn) // then logout
+                Communicator.Send("", 3);
         }
     }
 }

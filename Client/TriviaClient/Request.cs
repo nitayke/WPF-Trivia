@@ -1,6 +1,4 @@
-﻿
-
-namespace TriviaClient
+﻿namespace TriviaClient
 {
     class LoginRequest
     {

@@ -1,11 +1,10 @@
-﻿<Window x:Class="TriviaClient.BestScores"
+﻿<Page x:Class="TriviaClient.BestScores"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TriviaClient"
-        mc:Ignorable="d"
-        Title="טבלת שיאים" Height="450" Width="600">
+        mc:Ignorable="d">
     <Grid>
         <Border CornerRadius="10" Grid.RowSpan="2">
             <Border.Background>
@@ -20,26 +19,26 @@
                 VerticalAlignment="Top" Margin="20" Click="Button_Click"/>
         <StackPanel>
             <TextBlock Text="טבלת השיאים"
-                   FontFamily="helvetica"
+                   FontFamily="Ozrad CLM"
                    FontSize="50"
                    Foreground="White"
                    HorizontalAlignment="Center"
                    Margin="50"/>
-            <TextBlock FontFamily="helvetica"
+            <TextBlock FontFamily="Tempus Sans ITC"
                        x:Name="user_1"
                        FontSize="30"
                            Opacity="0.8"
                        Foreground="White"
                        HorizontalAlignment="Center"
                        Margin="10"/>
-            <TextBlock FontFamily="helvetica"
+            <TextBlock FontFamily="Tempus Sans ITC"
                        x:Name="user_2"
                        FontSize="30"
                        Foreground="White"
                            Opacity="0.8"
                        HorizontalAlignment="Center"
                        Margin="10"/>
-            <TextBlock FontFamily="helvetica"
+            <TextBlock FontFamily="Tempus Sans ITC"
                        x:Name="user_3"
                            Opacity="0.8"
                        FontSize="30"
@@ -49,4 +48,4 @@
         </StackPanel>
 
     </Grid>
-</Window>
+</Page>
