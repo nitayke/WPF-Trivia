@@ -22,9 +22,9 @@ int SqliteDatabase::callback2(void* data, int argc, char** argv, char** azColNam
 
 int SqliteDatabase::callback3(void* data, int argc, char** argv, char** azColName)
 {
-	if (argv[0] == NULL)
+	if (argv[0] == nullptr)
 	{
-		*(float*)data = 0;
+		*(float*)data = -1;
 	}
 	else
 		*(float*)data = std::atof(argv[0]);
@@ -115,7 +115,7 @@ float SqliteDatabase::playerAverageAnswerTime(string username)
 {
 	float avgTime;
 	char* errMessage = nullptr;
-	string sqlStatement = "SELECT avg(time) FROM STATISTICS WHERE USER=" + username + ";";
+	string sqlStatement = "SELECT avg(time) FROM STATISTICS WHERE USER=\"" + username + "\";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback3, &avgTime, &errMessage);
 	return avgTime;
 }
@@ -124,7 +124,7 @@ int SqliteDatabase::getNumOfCorrectAnswers(string username)
 {
 	float correctAnswers;
 	char* errMessage = nullptr;
-	string sqlStatement = "SELECT SUM(right) FROM STATISTICS WHERE USER=" + username + ";";
+	string sqlStatement = "SELECT SUM(is_right) FROM STATISTICS WHERE USER=\"" + username + "\";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback3, &correctAnswers, &errMessage);
 	return int(correctAnswers);
 }
@@ -133,7 +133,7 @@ int SqliteDatabase::getNumOfTotalAnswers(string username)
 {
 	float totalAnswers;
 	char* errMessage = nullptr;
-	string sqlStatement = "SELECT COUNT(right) FROM STATISTICS WHERE USER=" + username + ";";
+	string sqlStatement = "SELECT COUNT(is_right) FROM STATISTICS WHERE USER=\"" + username + "\";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback3, &totalAnswers, &errMessage);
 	return int(totalAnswers);
 }
@@ -142,7 +142,7 @@ int SqliteDatabase::getNumOfPlayerGames(string username)
 {
 	float numGames;
 	char* errMessage = nullptr;
-	string sqlStatement = "SELECT COUNT(DISTINCT game_id) FROM STATISTICS WHERE USER=" + username + ";";
+	string sqlStatement = "SELECT COUNT(DISTINCT game_id) FROM STATISTICS WHERE USER=\"" + username + "\";";
 	sqlite3_exec(db, sqlStatement.c_str(), callback3, &numGames, &errMessage);
 	return int(numGames);
 }

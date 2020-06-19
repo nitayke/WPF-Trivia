@@ -143,14 +143,14 @@ Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse res
 	string statistics;
 	for (auto i : response.statistics)
 	{
-		statistics += i + ", ";
+		statistics += i + ",";
 	}
-	statistics = statistics.substr(0, statistics.length() - 2);
+	statistics = statistics.substr(0, statistics.length() - 1);
 	msg["statistics"] = statistics;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;
-	responseBuffer.push_back(GETROOMS);
+	responseBuffer.push_back(GETSTATISTICS);
 	for (auto i : getLengthBuffer(strMsg))
 	{
 		responseBuffer.push_back(i);

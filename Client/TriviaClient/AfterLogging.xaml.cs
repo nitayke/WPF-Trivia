@@ -34,6 +34,7 @@ namespace TriviaClient
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Communicator.Send("", 3);
+            MainWindow.isLoggedIn = false;
             NavigationService.Navigate(new Menu());
         }
         // quit

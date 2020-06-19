@@ -45,20 +45,30 @@ std::vector<string> StatisticsManager::getStatistics() // records
 	std::map<int, string> scores;
 	std::vector<string> tmp;
 	std::vector<string> result;
+	int negative = -1;
 	for (string username : m_database->getPlayers())
 	{
 		int correct = m_database->getNumOfCorrectAnswers(username);
 		int total = m_database->getNumOfTotalAnswers(username);
 		float time = m_database->playerAverageAnswerTime(username);
-		score = ((correct / total) / time) * 1000;
+		if (total == 0)
+			score = negative;
+		else
+			score = ((correct / total) / time) * 1000;
 		scores[score] = username;
+		negative -= 1;
 	}
 	for (auto i = scores.begin(); i != scores.end(); i++)
 	{
 		tmp.push_back(std::to_string(i->first));
 		tmp.push_back(i->second);
 	}
-	for (size_t i = 1; i < 11; i++)
+	int lim;
+	if (tmp.size() < 11)
+		lim = tmp.size();
+	else
+		lim = 11;
+	for (size_t i = 1; i <= lim; i++)
 	{
 		result.push_back(tmp[tmp.size() - i]);
 	}
