@@ -134,5 +134,11 @@
     <ClInclude Include="RoomManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RoomAdminRequestHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomMemberRequestHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
