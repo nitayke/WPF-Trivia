@@ -32,6 +32,11 @@ struct CreateRoomRequest
 	unsigned int answerTimeout;
 };
 
+struct GetUserScoreRequest
+{
+	string username;
+};
+
 enum Codes
 {
 	LOGIN,
@@ -43,5 +48,6 @@ enum Codes
 	CREATEROOM,
 	GETPLAYERSINROOM,
 	GETSTATISTICS, // 8
-	CLOSEROOM
+	CLOSEROOM,
+	GETUSERSCORE
 };

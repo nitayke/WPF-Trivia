@@ -27,4 +27,8 @@
         public int roomId;
         public int status;
     }
+    class GetUserScoreResponse
+    {
+        public string statistics;
+    }
 }

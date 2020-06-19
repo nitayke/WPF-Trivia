@@ -85,3 +85,19 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(Bu
 
 	return req;
 }
+
+GetUserScoreRequest JsonRequestPacketDeserializer::deserializeGetUserScoreRequest(Buffer buf)
+{
+	int size = buf.size();
+	string strMsg = "";
+	json msg;
+	GetUserScoreRequest req;
+	for (int i = 5; i < size; i++)
+	{
+		strMsg += (char)buf[i];
+	}
+	msg = json::parse(strMsg);
+	req.username = msg["username"];
+
+	return req;
+}

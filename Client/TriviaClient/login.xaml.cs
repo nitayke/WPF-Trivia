@@ -27,6 +27,7 @@ namespace TriviaClient
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             LoginRequest request = new LoginRequest();
+            MainWindow.username = username.Text;
             request.username = username.Text;
             request.password = password.Password;
             string answer = Communicator.Send(JsonConvert.SerializeObject(request), 0);

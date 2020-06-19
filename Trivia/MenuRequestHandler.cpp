@@ -42,6 +42,9 @@ RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)
 	case CLOSEROOM:
 		req = this->closeRoom(requestInfo);
 		break;
+	case GETUSERSCORE:
+		req = this->getUserScore(requestInfo);
+		break;
 	}
 	return req;
 }
@@ -132,8 +135,19 @@ RequestResult MenuRequestHandler::closeRoom(RequestInfo requestInfo)
 	LogoutResponse res;
 	RequestResult result;
 	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
-	m_roomManager.deleteRoom(req.roomId); // fix this
+	m_roomManager.deleteRoom(req.roomId);
 	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = this;
+	return result;
+}
+
+RequestResult MenuRequestHandler::getUserScore(RequestInfo requestInfo)
+{
+	getStatisticsResponse res;
+	RequestResult result;
+	res.status = 1;
+	res.statistics = m_statisticsManager.getUserStatistics("nitay");
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	result.newHandler = this;
 	return result;

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System;
 
 namespace TriviaClient
 {
@@ -39,7 +40,7 @@ namespace TriviaClient
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             Communicator.Send("", 3);
-            // Environment.Exit() ?
+            Environment.Exit(0);
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text;
 
 namespace TriviaClient
 {
@@ -9,7 +10,10 @@ namespace TriviaClient
         public MyScore()
         {
             InitializeComponent();
-
+            string answer = Communicator.Send(MainWindow.username, 10);
+            GetUserScoreResponse response = JsonConvert.DeserializeObject<GetUserScoreResponse>(answer);
+            response.statistics.Split(',', ' ');
+            
             //games_num;
             //right_answers;
             //wrong_answers;

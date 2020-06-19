@@ -11,6 +11,7 @@ namespace TriviaClient
     {
         public static bool isLoggedIn;
         public static bool openedRoom;
+        public static string username;
         public MainWindow()
         {
             InitializeComponent();
