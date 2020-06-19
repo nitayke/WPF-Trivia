@@ -12,8 +12,11 @@ namespace TriviaClient
             InitializeComponent();
             string answer = Communicator.Send(MainWindow.username, 10);
             GetUserScoreResponse response = JsonConvert.DeserializeObject<GetUserScoreResponse>(answer);
-            response.statistics.Split(',', ' ');
-            
+            string[] arr = response.statistics.Split(',', ' ');
+            games_num.Text = arr[0];
+            right_answers.Text = arr[1];
+            wrong_answers.Text = arr[2];
+            avg_time.Text = arr[3];
             //games_num;
             //right_answers;
             //wrong_answers;

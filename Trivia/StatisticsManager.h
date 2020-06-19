@@ -10,6 +10,7 @@ private:
 
 	std::vector<string> getHighScore();
 public:
+	StatisticsManager(IDatabase* db);
 	std::vector<string> getStatistics();
 	std::vector<string> getUserStatistics(string username);
 };

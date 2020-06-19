@@ -13,7 +13,8 @@ bool MenuRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == CREATEROOM ||
 		requestInfo.id == GETPLAYERSINROOM ||
 		requestInfo.id == GETSTATISTICS ||
-		requestInfo.id == CLOSEROOM;
+		requestInfo.id == CLOSEROOM ||
+		requestInfo.id == GETUSERSCORE;
 }
 
 RequestResult MenuRequestHandler::handleRequest(RequestInfo requestInfo)

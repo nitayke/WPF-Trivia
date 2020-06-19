@@ -146,7 +146,7 @@ Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse res
 		statistics += i + ", ";
 	}
 	statistics = statistics.substr(0, statistics.length() - 2);
-	msg["UserStatistics"] = statistics;
+	msg["statistics"] = statistics;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;

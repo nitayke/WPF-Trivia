@@ -22,7 +22,12 @@ int SqliteDatabase::callback2(void* data, int argc, char** argv, char** azColNam
 
 int SqliteDatabase::callback3(void* data, int argc, char** argv, char** azColName)
 {
-	*(float*)data = std::atof(argv[0]);
+	if (argv[0] == NULL)
+	{
+		*(float*)data = 0;
+	}
+	else
+		*(float*)data = std::atof(argv[0]);
 	return 0;
 }
 

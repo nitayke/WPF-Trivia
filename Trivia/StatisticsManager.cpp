@@ -33,6 +33,11 @@ std::vector<string> StatisticsManager::getUserStatistics(string username)
 	return result;
 }
 
+StatisticsManager::StatisticsManager(IDatabase* db)
+{
+	m_database = db;
+}
+
 std::vector<string> StatisticsManager::getStatistics() // records
 {
 	// user1, score1, user2, score2, user3, score3... score5
