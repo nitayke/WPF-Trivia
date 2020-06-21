@@ -25,11 +25,13 @@ namespace TriviaClient
         }
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            string answer = Communicator.Send("{\"roomId\":" + JoinRoom.roomId + "}", 7);
+            string answer = Communicator.Send("{\"roomId\":" + Communicator.roomId.ToString() + "}", 7);
             answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
             // we use that as a GetUsersInRoomResponse
             GetRoomsResponse response = JsonConvert.DeserializeObject<GetRoomsResponse>(answer);
             string[] users = response.rooms.Split(',');
+            if (users[0] == "" && users.Length == 1)
+                return;
             foreach (string user in users)
             {
                 TextBlock textBlock = new TextBlock();

@@ -11,7 +11,6 @@ namespace TriviaClient
     /// </summary>
     public partial class JoinRoom : Page
     {
-        public static string roomId;
         public JoinRoom()
         {
             InitializeComponent();
@@ -36,7 +35,7 @@ namespace TriviaClient
             {
                 Button button = new Button();
                 button.Content = room.Substring(0, room.IndexOf(':'));
-                roomId = room.Substring(room.IndexOf(':')+1);
+                Communicator.roomId = int.Parse(room.Substring(room.IndexOf(':')+1));
                 button.FontSize = 20;
                 button.FontFamily = new FontFamily("Tempus Sans ITC");
                 button.Background = Brushes.Blue;
@@ -48,7 +47,7 @@ namespace TriviaClient
         }
         private void Room_Choose_Click(object sender, RoutedEventArgs e)
         {
-            string msg = "{\"roomId\":" + roomId + "}";
+            string msg = "{\"roomId\":" + Communicator.roomId.ToString() + "}";
             Communicator.Send(msg, 5);
             NavigationService.Navigate(new WaitingRoom());
         }
