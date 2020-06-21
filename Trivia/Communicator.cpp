@@ -45,6 +45,7 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		int res = recv(client_socket, buffer, 1024, 0);
 		if (buffer[0] == 0 && buffer[4] == 0)
 		{
+			return;
 		}
 		if (res == INVALID_SOCKET)
 		{

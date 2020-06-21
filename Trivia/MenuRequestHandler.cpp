@@ -77,6 +77,12 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 	GetPlayersInRoomResponse res;
 	RequestResult result;
 	std::vector<RoomData> rooms = m_roomManager.getRooms();
+	if (req.roomId == -1) // if there are no players in the room
+	{
+		result.response = JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse());
+		result.newHandler = this;
+		return result;
+	}
 	for (auto i : rooms)
 	{
 		if (i.id == req.roomId)
@@ -106,9 +112,10 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
 	RequestResult result;
 	JoinRoomResponse res;
+	m_roomManager.addUserToRoom(req.roomId, m_user);
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr; // need to be fixed
+	result.newHandler = this;
 	return result;
 }
 
@@ -127,7 +134,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	CRes.status = 1;
 	RequestResult res;
 	res.response = JsonResponsePacketSerializer::serializeResponse(CRes);
-	res.newHandler = this; //TODO: fix this handler.
+	res.newHandler = this;
 	return res;
 }
 

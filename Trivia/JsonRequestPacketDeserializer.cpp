@@ -45,8 +45,13 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersInRo
 	{
 		strMsg += (char)buf[i];
 	}
-	msg = json::parse(strMsg);
-	req.roomId = msg["roomId"];
+	if (strMsg.substr(0, 11) == "{\"roomId\":}")
+		req.roomId = -1;
+	else
+	{
+		msg = json::parse(strMsg);
+		req.roomId = msg["roomId"];
+	}
 
 	return req;
 }

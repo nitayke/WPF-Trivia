@@ -16,7 +16,8 @@
         </Border>
 
         <StackPanel Margin="20">
-            <!-- we have to add room name here-->
+            <Button Width="150" Height="25" Content="Close Room" Click="CloseRoom_Click"
+                    FontFamily="Tempus Sans ITC" FontSize="16" Margin="250,0,0,20"/>
             <TextBlock Text="אתה מחובר לחדר " 
                            FontFamily="Ozrad CLM"
                            FontSize="40"
@@ -24,14 +25,22 @@
                            HorizontalAlignment="Center"/>
             <TextBlock Text=":המשתמשים בחדר"
                            FontFamily="Heebo"
-                           Margin="0 30 0 0"
+                           Margin="0 10 0 0"
                            FontSize="30"
                            Foreground="White"
                            HorizontalAlignment="Right"/>
-            <Grid Height="150" Width="400" Background="White" Margin="20"/>
-            <Button Width="200" Height="30" Content="Start Game" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Width="150" Height="25" Margin="10" Content="Close Room" Click="Button_Click" FontFamily="Tempus Sans ITC" FontSize="16"/>
+            <Grid Height="150" Width="400" Background="White" Margin="20">
+                <StackPanel x:Name="users_panel">
+                    
+                </StackPanel>
+            </Grid>
+            <Button Width="150" Height="25" Content="Refresh"
+                    FontFamily="Tempus Sans ITC" FontSize="20" Margin="10"
+                    Click="Refresh_Click"/>
+            <Button Width="200" Height="30" Content="Start Game"
+                    FontFamily="Tempus Sans ITC" FontSize="20"
+                    Click="Start_Click"/>
         </StackPanel>
-        
+
     </Grid>
-    </Page>
+</Page>

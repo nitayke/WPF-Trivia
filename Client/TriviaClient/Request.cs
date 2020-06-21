@@ -31,4 +31,8 @@
     {
         public string statistics;
     }
+    class GetRoomsResponse
+    {
+        public string rooms;
+    }
 }

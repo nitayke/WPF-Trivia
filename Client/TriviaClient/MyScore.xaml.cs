@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Text;
 
 namespace TriviaClient
 {
@@ -11,16 +10,13 @@ namespace TriviaClient
         {
             InitializeComponent();
             string answer = Communicator.Send(MainWindow.username, 10);
+            answer = answer.Substring(5, answer.IndexOf('}')-4);
             GetUserScoreResponse response = JsonConvert.DeserializeObject<GetUserScoreResponse>(answer);
-            string[] arr = response.statistics.Split(',', ' ');
-            games_num.Text = arr[0];
-            right_answers.Text = arr[1];
-            wrong_answers.Text = arr[2];
-            avg_time.Text = arr[3];
-            //games_num;
-            //right_answers;
-            //wrong_answers;
-            //avg_time;
+            string[] arr = response.statistics.Split(',');
+            avg_time.Text = float.Parse(arr[0]) == -1.0 ? "No data" : arr[0].Substring(0, 3);
+            right_answers.Text = int.Parse(arr[1]) == -1 ? "No data" : arr[1];
+            wrong_answers.Text = int.Parse(arr[2]) == -1 ? "No data" : arr[2];
+            games_num.Text = int.Parse(arr[3]) == -1 ? "No data" : arr[3];
         }
         // back
         private void Button_Click(object sender, RoutedEventArgs e)

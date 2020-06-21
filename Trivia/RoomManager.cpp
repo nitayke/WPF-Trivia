@@ -2,7 +2,7 @@
 
 void RoomManager::createRoom(LoggedUser user, RoomData roomData)
 {
-	Room* room = new Room(roomData);
+	Room* room = new Room(roomData, user);
 	m_rooms.insert(std::pair<int, Room>(roomData.id, *room));
 }
 
@@ -30,4 +30,9 @@ std::vector<RoomData> RoomManager::getRooms()
 Room RoomManager::getRoom(int ID)
 {
 	return this->m_rooms[ID];
+}
+
+void RoomManager::addUserToRoom(int roomId, LoggedUser user)
+{
+	m_rooms[roomId].addUser(user);
 }
