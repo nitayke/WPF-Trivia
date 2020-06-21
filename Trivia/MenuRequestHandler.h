@@ -21,6 +21,8 @@ private:
 	RequestResult getStatistics(RequestInfo);
 	RequestResult joinRoom(RequestInfo);
 	RequestResult createRoom(RequestInfo);
+	RequestResult closeRoom(RequestInfo);
+	RequestResult getUserScore(RequestInfo);
 
 	int m_id = 0;
 	LoggedUser m_user;

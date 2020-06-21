@@ -43,8 +43,10 @@ void Communicator::handleNewClient(SOCKET client_socket)
 	while (true)
 	{
 		int res = recv(client_socket, buffer, 1024, 0);
-		if (buffer[4] == '\0')
+		if (buffer[0] == 0 && buffer[4] == 0)
+		{
 			return;
+		}
 		if (res == INVALID_SOCKET)
 		{
 			throw std::exception("Error while recieving from socket");
@@ -65,7 +67,7 @@ void Communicator::handleNewClient(SOCKET client_socket)
 		std::cout << "Sending: " << strBuff << std::endl;
 		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET)
 			throw std::exception("Error while sending message to client");
-		m_clients[client_socket] = result.newHandler;
+		handler = result.newHandler;
 		for (int i = 0; i < 1024; i++) // reset the buffer
 			buffer[i] = '\0';
 		tmp.clear();

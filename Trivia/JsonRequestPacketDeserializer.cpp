@@ -45,8 +45,13 @@ GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersInRo
 	{
 		strMsg += (char)buf[i];
 	}
-	msg = json::parse(strMsg);
-	req.roomId = msg["roomId"];
+	if (strMsg.substr(0, 11) == "{\"roomId\":}")
+		req.roomId = -1;
+	else
+	{
+		msg = json::parse(strMsg);
+		req.roomId = msg["roomId"];
+	}
 
 	return req;
 }
@@ -81,7 +86,23 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(Bu
 	req.roomName = msg["roomName"];
 	req.maxUsers = msg["maxUsers"];
 	req.questionCount = msg["questionCount"];
-	req.answerTimeout = msg["AnswerTimeout"];
+	req.answerTimeout = msg["answerTimeout"];
+
+	return req;
+}
+
+GetUserScoreRequest JsonRequestPacketDeserializer::deserializeGetUserScoreRequest(Buffer buf)
+{
+	int size = buf.size();
+	string strMsg = "";
+	json msg;
+	GetUserScoreRequest req;
+	for (int i = 5; i < size; i++)
+	{
+		strMsg += (char)buf[i];
+	}
+	msg = json::parse(strMsg);
+	req.username = msg["username"];
 
 	return req;
 }

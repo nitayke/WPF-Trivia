@@ -3,11 +3,17 @@
 RequestHandlerFactory::RequestHandlerFactory(LoginManager logMngr, IDatabase* db, RoomManager roomMngr, StatisticsManager statMngr) : 
 	m_loginManager(logMngr), m_roomManager(roomMngr), m_StatisticsManager(statMngr)
 {
-	this->m_database = db;
+	m_database = db;
 }
 
 LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 {
+	return new LoginRequestHandler(this, &m_loginManager);
+}
+
+LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler(string loggedOutUser)
+{
+	m_loginManager.logout(loggedOutUser);
 	return new LoginRequestHandler(this, &m_loginManager);
 }
 

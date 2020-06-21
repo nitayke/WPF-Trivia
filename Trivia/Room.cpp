@@ -9,13 +9,14 @@ Room::Room() : m_users()
 	m_metadata.timePerQuestion = 10;
 }
 
-Room::Room(RoomData roomData)
+Room::Room(RoomData roomData, LoggedUser user)
 {
 	m_metadata.id = roomData.id;
 	m_metadata.isActive = roomData.isActive;
 	m_metadata.maxPlayers = roomData.maxPlayers;
 	m_metadata.name = roomData.name;
 	m_metadata.timePerQuestion = roomData.timePerQuestion;
+	m_users.push_back(user);
 }
 
 void Room::addUser(LoggedUser user)

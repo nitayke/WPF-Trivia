@@ -16,6 +16,7 @@ class RequestHandlerFactory
 public:
 	RequestHandlerFactory(LoginManager, IDatabase*, RoomManager, StatisticsManager);
 	LoginRequestHandler* createLoginRequestHandler();
+	LoginRequestHandler* createLoginRequestHandler(string loggedOutUser);
 	LoginManager& getLoginManager();
 	MenuRequestHandler* createMenuRequestHandler(LoggedUser);
 	StatisticsManager& getStatisticsManager();

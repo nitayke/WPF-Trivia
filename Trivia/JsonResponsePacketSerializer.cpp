@@ -67,13 +67,13 @@ Buffer JsonResponsePacketSerializer::serializeResponse(LogoutResponse response)
 Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomsResponse response)
 {
 	json msg;
-	string room;
+	string rooms;
 	for (auto i : response.rooms)
 	{
-		room += i.name + ", ";
+		rooms += i.name + ":" + std::to_string(i.id) + ",";
 	}
-	room = room.substr(0, room.length() - 2);
-	msg["Rooms"] = room;
+	rooms = rooms.substr(0, rooms.length() - 1);
+	msg["rooms"] = rooms;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;
@@ -93,15 +93,15 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse 
 {
 	json msg;
 	string playersInRoom;
+	Buffer responseBuffer;
 	for (auto i : response.players)
 	{
-		playersInRoom += i + ", ";
+		playersInRoom += i + ",";
 	}
-	playersInRoom = playersInRoom.substr(0, playersInRoom.length() - 2);
-	msg["PlayersInRoom"] = playersInRoom;
+	playersInRoom = playersInRoom.substr(0, playersInRoom.length() - 1);
+	msg["rooms"] = playersInRoom;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
-	Buffer responseBuffer;
 	responseBuffer.push_back(GETROOMS);
 	for (auto i : getLengthBuffer(strMsg))
 	{
@@ -121,7 +121,20 @@ Buffer JsonResponsePacketSerializer::serializeResponse(JoinRoomResponse response
 
 Buffer JsonResponsePacketSerializer::serializeResponse(CreateRoomResponse response)
 {
-	return SerializeRegularResponse(CREATEROOM, response.status);
+	json msg;
+	msg["status"] = response.status;
+	msg["roomId"] = response.roomId;
+	Buffer responseBuffer;
+	string strMsg = msg.dump();
+	for (auto i : getLengthBuffer(strMsg))
+	{
+		responseBuffer.push_back(i);
+	}
+	for (auto i : strMsg)
+	{
+		responseBuffer.push_back((byte)i);
+	}
+	return responseBuffer;
 }
 
 Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse response)
@@ -130,14 +143,14 @@ Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse res
 	string statistics;
 	for (auto i : response.statistics)
 	{
-		statistics += i + ", ";
+		statistics += i + ",";
 	}
-	statistics = statistics.substr(0, statistics.length() - 2);
-	msg["UserStatistics"] = statistics;
+	statistics = statistics.substr(0, statistics.length() - 1);
+	msg["statistics"] = statistics;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;
-	responseBuffer.push_back(GETROOMS);
+	responseBuffer.push_back(GETSTATISTICS);
 	for (auto i : getLengthBuffer(strMsg))
 	{
 		responseBuffer.push_back(i);
