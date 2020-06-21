@@ -77,6 +77,12 @@ RequestResult MenuRequestHandler::getPlayersInRoom(RequestInfo requestInfo)
 	GetPlayersInRoomResponse res;
 	RequestResult result;
 	std::vector<RoomData> rooms = m_roomManager.getRooms();
+	if (req.roomId == -1) // if there are no players in the room
+	{
+		result.response = JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse());
+		result.newHandler = this;
+		return result;
+	}
 	for (auto i : rooms)
 	{
 		if (i.id == req.roomId)

@@ -96,10 +96,10 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetPlayersInRoomResponse 
 	Buffer responseBuffer;
 	for (auto i : response.players)
 	{
-		playersInRoom += i + ", ";
+		playersInRoom += i + ",";
 	}
-	playersInRoom = playersInRoom.substr(0, playersInRoom.length() - 2);
-	msg["PlayersInRoom"] = playersInRoom;
+	playersInRoom = playersInRoom.substr(0, playersInRoom.length() - 1);
+	msg["rooms"] = playersInRoom;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	responseBuffer.push_back(GETROOMS);
