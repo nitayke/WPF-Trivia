@@ -25,6 +25,7 @@ namespace TriviaClient
         }
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            users_panel.Children.Clear();
             string answer = Communicator.Send("{\"roomId\":" + Communicator.roomId.ToString() + "}", 7);
             answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
             // we use that as a GetUsersInRoomResponse
