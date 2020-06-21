@@ -178,11 +178,27 @@ Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomStateResponse resp
 	msg["status"] = response.status;
 	msg["hasGameBegun"] = response.hasGameBegun;
 	string playersStr;
-	for (i : response.players)
+	for (string i : response.players)
 	{
-		
+		playersStr += i + ",";
 	}
-	msg["players"] = response.players;
+	playersStr = playersStr.substr(0, playersStr.length() - 1);
+	msg["players"] = playersStr;
+	msg["answerCount"] = response.questionCount;
+	msg["answerTimeOut"] = response.answerTimeout;
+	string strMsg = msg.dump();
+	int msgLen = strMsg.length();
+	Buffer responseBuffer;
+	responseBuffer.push_back(GETROOMSTATE);
+	for (auto i : getLengthBuffer(strMsg))
+	{
+		responseBuffer.push_back(i);
+	}
+	for (auto i : strMsg)
+	{
+		responseBuffer.push_back((byte)i);
+	}
+	return responseBuffer;
 }
 
 Buffer JsonResponsePacketSerializer::serializeResponse(LeaveRoomResponse response)
