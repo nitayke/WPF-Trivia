@@ -5,11 +5,15 @@
 #include "RoomManager.h"
 #include "StatisticsManager.h"
 #include "MenuRequestHandler.h"
+#include "RoomMemberRequestHandler.h"
+#include "RoomAdminRequestHandler.h"
 
 #include <vector>
 
 class LoginRequestHandler;
 class MenuRequestHandler;
+class RoomMemberRequestHandler;
+class RoomAdminRequestHandler;
 
 class RequestHandlerFactory
 {
@@ -21,6 +25,8 @@ public:
 	MenuRequestHandler* createMenuRequestHandler(LoggedUser);
 	StatisticsManager& getStatisticsManager();
 	RoomManager& getRoomManager();
+	RoomAdminRequestHandler* createRoomAdminRequestHandler(LoggedUser, Room);
+	RoomMemberRequestHandler* createRoomMemberRequestHandler(LoggedUser, Room);
 
 private:
 	LoginManager m_loginManager;

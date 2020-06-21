@@ -161,3 +161,47 @@ Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse res
 	}
 	return responseBuffer;
 }
+
+Buffer JsonResponsePacketSerializer::serializeResponse(CloseRoomResponse response)
+{
+	return SerializeRegularResponse(CLOSEROOM, response.status);
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(StartGameResponse response)
+{
+	return SerializeRegularResponse(STARTGAME, response.status);
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomStateResponse response)
+{
+	json msg;
+	msg["status"] = response.status;
+	msg["hasGameBegun"] = response.hasGameBegun;
+	string playersStr;
+	for (string i : response.players)
+	{
+		playersStr += i + ",";
+	}
+	playersStr = playersStr.substr(0, playersStr.length() - 1);
+	msg["players"] = playersStr;
+	msg["answerCount"] = response.questionCount;
+	msg["answerTimeOut"] = response.answerTimeout;
+	string strMsg = msg.dump();
+	int msgLen = strMsg.length();
+	Buffer responseBuffer;
+	responseBuffer.push_back(GETROOMSTATE);
+	for (auto i : getLengthBuffer(strMsg))
+	{
+		responseBuffer.push_back(i);
+	}
+	for (auto i : strMsg)
+	{
+		responseBuffer.push_back((byte)i);
+	}
+	return responseBuffer;
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(LeaveRoomResponse response)
+{
+	return SerializeRegularResponse(LEAVEROOM, response.status);
+}

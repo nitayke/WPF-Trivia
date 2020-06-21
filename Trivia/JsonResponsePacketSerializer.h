@@ -12,10 +12,16 @@ public:
 	static Buffer serializeResponse(ErrorResponse response);
 	static Buffer serializeResponse(LoginResponse response);
 	static Buffer serializeResponse(SignupResponse response);
+
 	static Buffer serializeResponse(LogoutResponse response);
 	static Buffer serializeResponse(GetRoomsResponse response);
 	static Buffer serializeResponse(GetPlayersInRoomResponse response);
 	static Buffer serializeResponse(JoinRoomResponse response);
 	static Buffer serializeResponse(CreateRoomResponse response);
 	static Buffer serializeResponse(getStatisticsResponse response);
+
+	static Buffer serializeResponse(CloseRoomResponse response);
+	static Buffer serializeResponse(StartGameResponse response);
+	static Buffer serializeResponse(GetRoomStateResponse response);
+	static Buffer serializeResponse(LeaveRoomResponse response);
 };
