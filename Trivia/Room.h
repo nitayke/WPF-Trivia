@@ -7,7 +7,7 @@ class Room
 {
 public:
 	Room();
-	Room(RoomData roomData);
+	Room(RoomData roomData, LoggedUser user);
 	void addUser(LoggedUser user);
 	void removeUser(LoggedUser user);
 	std::vector<string> getAllUsers();

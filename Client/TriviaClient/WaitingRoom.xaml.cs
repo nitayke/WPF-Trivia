@@ -10,6 +10,7 @@ namespace TriviaClient
         {
             InitializeComponent();
             MainWindow.openedRoom = true;
+
         }
         private void CloseRoom_Click(object sender, RoutedEventArgs e)
         {
@@ -24,7 +25,7 @@ namespace TriviaClient
         // not finished
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            string answer = Communicator.Send("", 7);
+            string answer = Communicator.Send("{\"roomId\":" + JoinRoom.roomId + "}", 7);
             answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
             // we use that as a GetUsersInRoomResponse
             GetRoomsResponse response = JsonConvert.DeserializeObject<GetRoomsResponse>(answer);

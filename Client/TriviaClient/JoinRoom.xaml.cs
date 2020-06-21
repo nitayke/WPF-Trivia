@@ -11,7 +11,7 @@ namespace TriviaClient
     /// </summary>
     public partial class JoinRoom : Page
     {
-        private string roomId;
+        public static string roomId;
         public JoinRoom()
         {
             InitializeComponent();
@@ -50,6 +50,7 @@ namespace TriviaClient
         {
             string msg = "{\"roomId\":" + roomId + "}";
             Communicator.Send(msg, 5);
+            NavigationService.Navigate(new WaitingRoom());
         }
     }
 }

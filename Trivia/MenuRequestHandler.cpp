@@ -106,9 +106,10 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	JoinRoomRequest req = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(requestInfo.buffer);
 	RequestResult result;
 	JoinRoomResponse res;
+	m_roomManager.addUserToRoom(req.roomId, m_user);
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr;
+	result.newHandler = this;
 	return result;
 }
 
