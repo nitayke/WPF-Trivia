@@ -161,3 +161,31 @@ Buffer JsonResponsePacketSerializer::serializeResponse(getStatisticsResponse res
 	}
 	return responseBuffer;
 }
+
+Buffer JsonResponsePacketSerializer::serializeResponse(CloseRoomResponse response)
+{
+	return SerializeRegularResponse(CLOSEROOM, response.status);
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(StartGameResponse response)
+{
+	return SerializeRegularResponse(STARTGAME, response.status);
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomStateResponse response)
+{
+	json msg;
+	msg["status"] = response.status;
+	msg["hasGameBegun"] = response.hasGameBegun;
+	string playersStr;
+	for (i : response.players)
+	{
+		
+	}
+	msg["players"] = response.players;
+}
+
+Buffer JsonResponsePacketSerializer::serializeResponse(LeaveRoomResponse response)
+{
+	return SerializeRegularResponse(LEAVEROOM, response.status);
+}
