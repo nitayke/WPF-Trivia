@@ -1,18 +1,21 @@
 ﻿using System.Windows;
 using Newtonsoft.Json;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace TriviaClient
 {
     public partial class WaitingRoom : Page
     {
         public static string roomName;
+        private bool gameStarted;
         public WaitingRoom()
         {
             InitializeComponent();
             MainWindow.openedRoom = true;
+            gameStarted = false;
             connected.Text = roomName + " אתה מחובר לחדר ";
-            Refresh_Click(0, new RoutedEventArgs());
+            ThreadStart thread = new ThreadStart(Refresh);
         }
         private void CloseRoom_Click(object sender, RoutedEventArgs e)
         {
@@ -25,7 +28,7 @@ namespace TriviaClient
             NavigationService.Navigate(new AfterLogging());
             MainWindow.openedRoom = false;
         }
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private void Refresh()
         {
             users_panel.Children.Clear();
             string answer = Communicator.Send("{\"roomId\":" + Communicator.roomId.ToString() + "}", 7);
