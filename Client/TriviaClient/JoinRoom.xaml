@@ -37,11 +37,9 @@
             <!-- room list -->
             <Grid Width="400" Height="200" Background="White">
                 <StackPanel x:Name="room_list_panel">
-                    
+
                 </StackPanel>
             </Grid>
-            <Button Style="{StaticResource BTNCORNER}" Content="Refresh" Width="200" Height="30" Margin="10"
-                    FontFamily="Tempus Sans ITC" FontSize="18" Click="Refresh_Click"/>
         </StackPanel>
 
 

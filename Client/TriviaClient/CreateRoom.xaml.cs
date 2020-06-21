@@ -47,5 +47,13 @@ namespace TriviaClient
         {
             ((TextBox)sender).Text = "";
         }
+
+        private void Page_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                CreateRoom_Click(0, new RoutedEventArgs());
+            }
+        }
     }
 }

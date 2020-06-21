@@ -38,6 +38,11 @@ namespace TriviaClient
             request.username = username.Text;
             request.password = password.Password;
             request.email = email.Text;
+            if (request.username == "" || request.password == "" || request.email == "")
+            {
+                wrong_data.Text = "Wrong input! Please try again.";
+                return;
+            }
             string answer = Communicator.Send(JsonConvert.SerializeObject(request), 1);
             switch (answer[15])
             {
@@ -47,6 +52,14 @@ namespace TriviaClient
                 default:
                     NavigationService.Navigate(new AfterLogging());
                     break;
+            }
+        }
+
+        private void Page_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                Register_Click(0, new RoutedEventArgs());
             }
         }
     }
