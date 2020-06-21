@@ -17,7 +17,7 @@
             </Border.Background>
         </Border>
 
-        <Button Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
+        <Button Style="{StaticResource BTNCORNER}" Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Margin="20" FontFamily="Tempus Sans ITC" FontSize="14"
                 Click="Back_Click"/>
         <StackPanel Margin="50">
@@ -74,7 +74,7 @@
                              Margin="10"
                          x:Name="email" GotFocus="email_GotFocus"/>
 
-            <Button Width="100" Height="40" Content="Register" Margin="20"
+            <Button Style="{StaticResource BTNCORNER}" Width="100" Height="40" Content="Register" Margin="20"
                     Click="Register_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
             <TextBlock x:Name="wrong_data" Margin="10" HorizontalAlignment="Center" FontSize="16"/>
 

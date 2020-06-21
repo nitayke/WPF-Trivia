@@ -6,10 +6,12 @@ namespace TriviaClient
 {
     public partial class WaitingRoom : Page
     {
+        public static string roomName;
         public WaitingRoom()
         {
             InitializeComponent();
             MainWindow.openedRoom = true;
+            connected.Text = roomName + " אתה מחובר לחדר ";
             Refresh_Click(0, new RoutedEventArgs());
         }
         private void CloseRoom_Click(object sender, RoutedEventArgs e)

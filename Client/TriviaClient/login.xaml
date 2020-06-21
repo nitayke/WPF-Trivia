@@ -16,7 +16,7 @@
             </Border.Background>
         </Border>
 
-        <Button Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
+        <Button Content="Back" Style="{StaticResource BTNCORNER}" Width="100" Height="20" HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Margin="20" FontFamily="Tempus Sans ITC"
                 FontSize="14" Click="Back_Click"/>
         <StackPanel Margin="30">
@@ -58,7 +58,7 @@
                              Margin="10 0 10 30"
                              x:Name="password" GotFocus="password_GotFocus"/>
 
-            <Button Width="100" Height="40" Content="Login" Margin="10" FontFamily="Tempus Sans ITC" FontSize="20" Click="Login_Click"/>
+            <Button Style="{StaticResource BTNCORNER}" Width="100" Height="40" Content="Login" Margin="10" FontFamily="Tempus Sans ITC" FontSize="20" Click="Login_Click"/>
 
             <TextBlock x:Name="wrong_data" Margin="20" FontSize="16"/>
 

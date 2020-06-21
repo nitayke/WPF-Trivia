@@ -15,8 +15,8 @@
             </Border.Background>
         </Border>
 
-        <Button Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Margin="20" Click="Button_Click" FontFamily="Tempus Sans ITC" FontSize="14"/>
+        <Button Style="{StaticResource BTNCORNER}" Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Margin="20" Click="Back_Click" FontFamily="Tempus Sans ITC" FontSize="14"/>
         <StackPanel Margin="50">
             <TextBlock Text="צור חדר"
                            FontFamily="Ozrad CLM"
@@ -91,8 +91,8 @@
                          x:Name="num_players"/>
 
 
-                <Button Width="100" Height="40" Content="Create"
-                        Click="Button_Click_1" Margin="20" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Width="100" Height="40" Content="Create"
+                        Click="CreateRoom_Click" Margin="20" FontFamily="Tempus Sans ITC" FontSize="20"/>
             <TextBlock x:Name="error" HorizontalAlignment="Center" FontSize="18"/>
 
         </StackPanel>

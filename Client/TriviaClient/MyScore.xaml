@@ -17,8 +17,8 @@
             </Border.Background>
         </Border>
 
-        <Button Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Margin="20" Click="Button_Click" FontFamily="Tempus Sans ITC" FontSize="16"/>
+        <Button Style="{StaticResource BTNCORNER}" Content="Back" Width="100" Height="20" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Margin="20" Click="Back_Click" FontFamily="Tempus Sans ITC" FontSize="16"/>
         <StackPanel>
             <TextBlock Text="ההישגים שלי"
                    FontFamily="Ozrad CLM"

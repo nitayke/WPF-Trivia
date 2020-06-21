@@ -26,12 +26,12 @@
         </StackPanel>
 
         <StackPanel Margin="80 50 80 0">
-            <Button Content="Sign Out" Height="50" Margin="10 100 10 10" Click="Button_Click_4" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Content="Join Room" Height="50" Margin="10" Click="Button_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Content="Create Room" Height="50" Margin="10" Click="Button_Click_1" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Content="My Status" Height="50" Margin="10" Click="Button_Click_2" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Content="Best Scores" Height="50" Margin="10" Click="Button_Click_3" FontFamily="Tempus Sans ITC" FontSize="20"/>
-            <Button Content="Quit" Height="40" Width="200" Margin="10" Click="Button_Click_5" FontFamily="Tempus Sans ITC" FontSize="16"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="Sign Out" Height="50" Margin="10 100 10 10" Click="Signout_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="Join Room" Height="50" Margin="10" Click="JoinRoom_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="Create Room" Height="50" Margin="10" Click="CreateRoom_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="My Status" Height="50" Margin="10" Click="MyStatus_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="Best Scores" Height="50" Margin="10" Click="BestScores_Click" FontFamily="Tempus Sans ITC" FontSize="20"/>
+            <Button Style="{StaticResource BTNCORNER}" Content="Quit" Height="40" Width="200" Margin="10" Click="Quit_Click" FontFamily="Tempus Sans ITC" FontSize="16"/>
         </StackPanel>
 
     </Grid>

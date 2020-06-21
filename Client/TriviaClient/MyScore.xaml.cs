@@ -18,8 +18,7 @@ namespace TriviaClient
             wrong_answers.Text = int.Parse(arr[2]) == -1 ? "No data" : arr[2];
             games_num.Text = int.Parse(arr[3]) == -1 ? "No data" : arr[3];
         }
-        // back
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AfterLogging());
         }

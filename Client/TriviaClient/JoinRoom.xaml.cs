@@ -14,15 +14,13 @@ namespace TriviaClient
         public JoinRoom()
         {
             InitializeComponent();
-            Button_Click_1("", new RoutedEventArgs());
+            Refresh_Click("", new RoutedEventArgs());
         }
-        // back
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AfterLogging());
         }
-        // refresh
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             room_list_panel.Children.Clear();
             string answer = Communicator.Send("", 4);
@@ -47,6 +45,7 @@ namespace TriviaClient
         }
         private void Room_Choose_Click(object sender, RoutedEventArgs e)
         {
+            WaitingRoom.roomName = ((Button)sender).Content.ToString();
             string msg = "{\"roomId\":" + Communicator.roomId.ToString() + "}";
             Communicator.Send(msg, 5);
             NavigationService.Navigate(new WaitingRoom());

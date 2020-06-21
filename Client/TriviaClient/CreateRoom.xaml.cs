@@ -11,13 +11,11 @@ namespace TriviaClient
         {
             InitializeComponent();
         }
-        // back
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AfterLogging());
         }
-        // create room
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void CreateRoom_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -37,6 +35,7 @@ namespace TriviaClient
                 questionCount = int.Parse(num_questions.Text),
                 maxUsers = int.Parse(num_players.Text)
             };
+            WaitingRoom.roomName = roomname.Text;
             string ans = Communicator.Send(JsonConvert.SerializeObject(request), 6);
             CreateRoomResponse response;
             string subStr = ans.Substring(4, 23);

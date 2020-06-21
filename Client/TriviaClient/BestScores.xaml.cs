@@ -29,8 +29,7 @@ namespace TriviaClient
             if (arr.Length > 9 && int.Parse(arr[9]) >= 0)
                 user_5.Text = arr[8] + "'s score is " + arr[9];
         }
-        // back
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AfterLogging());
         }
