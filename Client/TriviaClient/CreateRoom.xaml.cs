@@ -22,7 +22,7 @@ namespace TriviaClient
             try
             {
                 if (roomname.Text == "" || int.Parse(num_questions.Text) == 0 || int.Parse(time.Text) == 0 ||
-                int.Parse(num_players.Text) < 2)
+                int.Parse(num_players.Text) < 2 || roomname.Text.Contains(":"))
                     error.Text = "Wrong input! Please try again.";
             }
             catch

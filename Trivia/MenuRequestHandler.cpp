@@ -108,7 +108,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	JoinRoomResponse res;
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = nullptr; // need to be fixed
+	result.newHandler = nullptr;
 	return result;
 }
 
@@ -127,7 +127,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	CRes.status = 1;
 	RequestResult res;
 	res.response = JsonResponsePacketSerializer::serializeResponse(CRes);
-	res.newHandler = this; //TODO: fix this handler.
+	res.newHandler = this;
 	return res;
 }
 

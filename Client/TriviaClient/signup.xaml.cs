@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 
 namespace TriviaClient
 {
@@ -30,6 +31,23 @@ namespace TriviaClient
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Menu());
+        }
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            SignupRequest request = new SignupRequest();
+            request.username = username.Text;
+            request.password = password.Password;
+            request.email = email.Text;
+            string answer = Communicator.Send(JsonConvert.SerializeObject(request), 1);
+            switch (answer[15])
+            {
+                case '1':
+                    wrong_data.Text = "Username exists! Please try again.";
+                    break;
+                default:
+                    NavigationService.Navigate(new AfterLogging());
+                    break;
+            }
         }
     }
 }

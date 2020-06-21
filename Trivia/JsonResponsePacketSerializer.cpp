@@ -67,13 +67,13 @@ Buffer JsonResponsePacketSerializer::serializeResponse(LogoutResponse response)
 Buffer JsonResponsePacketSerializer::serializeResponse(GetRoomsResponse response)
 {
 	json msg;
-	string room;
+	string rooms;
 	for (auto i : response.rooms)
 	{
-		room += i.name + ", ";
+		rooms += i.name + ":" + std::to_string(i.id) + ",";
 	}
-	room = room.substr(0, room.length() - 2);
-	msg["Rooms"] = room;
+	rooms = rooms.substr(0, rooms.length() - 1);
+	msg["rooms"] = rooms;
 	string strMsg = msg.dump();
 	int msgLen = strMsg.length();
 	Buffer responseBuffer;

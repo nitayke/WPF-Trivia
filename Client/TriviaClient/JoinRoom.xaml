@@ -36,10 +36,12 @@
                        HorizontalAlignment="Left" FontFamily="Tempus Sans ITC"/>
             <!-- room list -->
             <Grid Width="400" Height="200" Background="White">
-
+                <StackPanel x:Name="room_list_panel">
+                    
+                </StackPanel>
             </Grid>
-            <Button Content="Refresh" Width="200" Height="30" Margin="10" FontFamily="Tempus Sans ITC" FontSize="18"/>
-            <Button Content="Join" Height="40" Width="400" FontFamily="Tempus Sans ITC" FontSize="24"/>
+            <Button Content="Refresh" Width="200" Height="30" Margin="10"
+                    FontFamily="Tempus Sans ITC" FontSize="18" Click="Button_Click_1"/>
         </StackPanel>
 
 
