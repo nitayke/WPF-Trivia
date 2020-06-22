@@ -64,6 +64,7 @@ namespace TriviaClient
         {
             hasEntered = true;
             WaitingRoom.roomName = ((Button)sender).Content.ToString();
+            WaitingRoom.isAdmin = false;
             string msg = "{\"roomId\":" + Communicator.roomId.ToString() + "}";
             Communicator.Send(msg, 5);
             NavigationService.Navigate(new WaitingRoom());

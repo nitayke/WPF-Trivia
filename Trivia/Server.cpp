@@ -13,7 +13,6 @@ void Server::run()
 	t_connector.detach();
 
 	std::string command;
-	
 	while (command != "exit")
 	{
 		std::cout << "Enter a command: ";

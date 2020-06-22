@@ -115,7 +115,7 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo requestInfo)
 	m_roomManager.addUserToRoom(req.roomId, m_user);
 	res.status = 1;
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
-	result.newHandler = this;
+	result.newHandler = m_handlerFactory.createRoomMemberRequestHandler(m_user, m_roomManager.getRoom(req.roomId)); 
 	return result;
 }
 
@@ -128,14 +128,15 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	room.questionCount = req.questionCount;
 	room.maxPlayers = req.maxUsers;
 	room.name = req.roomName;
-	room.isActive = ACTIVE;
+	room.isActive = NOT_ACTIVE;
 	m_roomManager.createRoom(m_user, room);
 	CreateRoomResponse CRes;
 	CRes.roomId = m_id;
 	CRes.status = 1;
 	RequestResult res;
 	res.response = JsonResponsePacketSerializer::serializeResponse(CRes);
-	res.newHandler = this;
+	res.newHandler = m_handlerFactory.createRoomAdminRequestHandler(m_user, m_roomManager.getRoom(room.id));
+	m_id++;
 	return res;
 }
 
