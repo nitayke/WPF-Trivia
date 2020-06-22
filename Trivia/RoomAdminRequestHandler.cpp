@@ -47,7 +47,17 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 	return result;
 }
 
-RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo)
+RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 {
-	return RequestResult();
+	GetRoomStateResponse res;
+	RoomData data = m_room.getRoomData();
+	RequestResult result;
+	res.answerTimeout = data.timePerQuestion;
+	res.hasGameBegun = data.isActive;
+	res.players = m_room.getAllUsers();
+	res.questionCount = data.questionCount;
+	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = this;
+	return result;
 }
