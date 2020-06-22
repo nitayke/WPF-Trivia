@@ -27,15 +27,37 @@ RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo requestInfo)
 
 RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo requestInfo)
 {
-	return RequestResult();
+	LeaveRoomResponse res;
+	RequestResult result;
+	res.status = 1;
+	this->m_room.removeUser(m_user);
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = m_handlerFactory.createMenuRequestHandler(m_user);
+	return result;
 }
 
 RequestResult RoomMemberRequestHandler::startGame(RequestInfo requestInfo)
 {
-	return RequestResult();
+	StartGameResponse res;
+	RequestResult result;
+	res.status = 1;
+	// start a game?
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr; // for the next version
+	return result;
 }
 
 RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo requestInfo)
 {
-	return RequestResult();
+	GetRoomStateResponse res;
+	RoomData data = m_room.getRoomData();
+	RequestResult result;
+	res.answerTimeout = data.timePerQuestion;
+	res.hasGameBegun = data.isActive;
+	res.players = m_room.getAllUsers();
+	res.questionCount = data.questionCount;
+	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = this;
+	return result;
 }

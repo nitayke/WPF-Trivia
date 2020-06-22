@@ -125,6 +125,7 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo requestInfo)
 	RoomData room;
 	room.id = m_id;
 	room.timePerQuestion = req.answerTimeout;
+	room.questionCount = req.questionCount;
 	room.maxPlayers = req.maxUsers;
 	room.name = req.roomName;
 	room.isActive = ACTIVE;

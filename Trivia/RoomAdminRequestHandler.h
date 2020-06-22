@@ -7,7 +7,7 @@
 
 class RequestHandlerFactory;
 
-class RoomAdminRequestHandler
+class RoomAdminRequestHandler : IRequestHandler
 {
 public:
 	RoomAdminRequestHandler(RequestHandlerFactory&, RoomManager&, LoggedUser, Room);
