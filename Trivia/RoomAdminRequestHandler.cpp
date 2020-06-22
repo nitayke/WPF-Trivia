@@ -11,3 +11,43 @@ bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo requestInfo)
 		requestInfo.id == STARTGAME ||
 		requestInfo.id == GETROOMSTATE;
 }
+
+RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
+{
+	switch (requestInfo.id)
+	{
+	case CLOSEROOM:
+		return closeRoom(requestInfo);
+	case STARTGAME:
+		return startGame(requestInfo);
+	case GETROOMSTATE:
+		return startGame(requestInfo);
+	}
+}
+
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo requestInfo)
+{
+	CloseRoomResponse res;
+	RequestResult result;
+	res.status = 1;
+	m_roomManager.deleteRoom(m_room.getRoomData().id);
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = m_handlerFactory.createMenuRequestHandler(m_user);
+	return result;
+}
+
+RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
+{
+	StartGameResponse res;
+	RequestResult result;
+	res.status = 1;
+	// start game
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = nullptr; // game request handler
+	return result;
+}
+
+RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo)
+{
+	return RequestResult();
+}
