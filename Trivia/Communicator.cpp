@@ -5,7 +5,7 @@ Communicator::Communicator(RequestHandlerFactory* reqFactory)
 	_socket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (_socket == INVALID_SOCKET)
 		throw std::exception(__FUNCTION__ " - socket");
-	this->m_handlerFactory = reqFactory;
+	m_handlerFactory = reqFactory;
 }
 
 Communicator::~Communicator()
@@ -63,12 +63,12 @@ void Communicator::handleNewClient(SOCKET client_socket)
 			return;
 		}
 		result = handler->handleRequest(info);
+		delete handler;
 		std::string strBuff(result.response.begin(), result.response.end());
 		std::cout << "Sending: " << strBuff << std::endl;
 		if (send(client_socket, strBuff.c_str(), 1024, 0) == INVALID_SOCKET)
 			throw std::exception("Error while sending message to client");
 		handler = result.newHandler;
-		delete result.newHandler;
 		for (int i = 0; i < 1024; i++) // reset the buffer
 			buffer[i] = '\0';
 		tmp.clear();
@@ -86,7 +86,7 @@ void Communicator::startHandleRequests()
 			throw std::exception(__FUNCTION__);
 
 		printf("Client accepted !\n");
-		this->m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, 
+		m_clients.insert(std::pair<SOCKET, IRequestHandler*>(client_socket, 
 			m_handlerFactory->createLoginRequestHandler()));
 		std::thread tr(&Communicator::handleNewClient, this, client_socket);
 		tr.detach();

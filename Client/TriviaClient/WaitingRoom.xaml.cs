@@ -40,9 +40,10 @@ namespace TriviaClient
         }
         private void Refresh()
         {
+            int hasBegun = 0;
             while (!gameStarted)
             {
-                int hasBegun = RefreshUsersList();
+                hasBegun = RefreshUsersList();
                 if (!isAdmin)
                 {
                     checkGame(hasBegun);
@@ -92,13 +93,12 @@ namespace TriviaClient
             }
             else if (hasBegun == -1)
             {
-                Communicator.Send("", 14);
+                MainWindow.openedRoom = false;
+                gameStarted = true;
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     NavigationService.Navigate(new AfterLogging());
                 }));
-                MainWindow.openedRoom = false;
-                gameStarted = true;
             }
         }
         private void CloseRoom_Click(object sender, RoutedEventArgs e)
