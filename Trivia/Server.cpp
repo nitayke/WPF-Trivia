@@ -13,10 +13,11 @@ void Server::run()
 	t_connector.detach();
 
 	std::string command;
-	
-	while (command != "exit")
+	while (true)
 	{
 		std::cout << "Enter a command: ";
 		std::cin >> command;
+		if (command == "exit")
+			exit(0);
 	}
 }

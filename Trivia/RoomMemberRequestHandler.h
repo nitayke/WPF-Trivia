@@ -7,10 +7,10 @@
 
 class RequestHandlerFactory;
 
-class RoomMemberRequestHandler : IRequestHandler
+class RoomMemberRequestHandler : public IRequestHandler
 {
 public:
-	RoomMemberRequestHandler(RequestHandlerFactory&, RoomManager&, LoggedUser, Room);
+	RoomMemberRequestHandler(RequestHandlerFactory&, RoomManager&, LoggedUser, Room&);
 	bool isRequestRelevant(RequestInfo);
 	RequestResult handleRequest(RequestInfo);
 
@@ -19,7 +19,8 @@ private:
 	RequestResult startGame(RequestInfo);
 	RequestResult getRoomState(RequestInfo);
 
-	Room m_room;
+	int m_roomId;
+	Room& m_room;
 	LoggedUser m_user;
 	RoomManager& m_roomManager;
 	RequestHandlerFactory& m_handlerFactory;

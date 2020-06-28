@@ -11,6 +11,7 @@ public:
 	void deleteRoom(int ID);
 	unsigned int getRoomState(int ID);
 	std::vector<RoomData> getRooms();
-	Room getRoom(int ID);
+	Room& getRoom(int ID);
 	void addUserToRoom(int roomId, LoggedUser user);
+	bool doesRoomExist(int ID);
 };

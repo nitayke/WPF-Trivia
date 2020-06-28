@@ -4,6 +4,7 @@
 #include "RoomManager.h"
 #include "StatisticsManager.h"
 #include "RequestHandlerFactory.h"
+#include <mutex>
 
 class RequestHandlerFactory;
 
@@ -24,7 +25,8 @@ private:
 	RequestResult closeRoom(RequestInfo);
 	RequestResult getUserScore(RequestInfo);
 
-	int m_id = 0;
+	static std::mutex m_roomManagerLock;
+	static int m_id;
 	LoggedUser m_user;
 	RoomManager& m_roomManager;
 	StatisticsManager& m_statisticsManager;

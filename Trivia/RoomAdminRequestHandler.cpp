@@ -1,6 +1,6 @@
 #include "RoomAdminRequestHandler.h"
 
-RoomAdminRequestHandler::RoomAdminRequestHandler(RequestHandlerFactory& req, RoomManager& roomM, LoggedUser user, Room room) :
+RoomAdminRequestHandler::RoomAdminRequestHandler(RequestHandlerFactory& req, RoomManager& roomM, LoggedUser user, Room& room) :
 	m_handlerFactory(req), m_roomManager(roomM), m_user(user), m_room(room)
 {
 }
@@ -21,7 +21,7 @@ RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo requestInfo)
 	case STARTGAME:
 		return startGame(requestInfo);
 	case GETROOMSTATE:
-		return startGame(requestInfo);
+		return getRoomState(requestInfo);
 	}
 }
 
@@ -41,13 +41,24 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo requestInfo)
 	StartGameResponse res;
 	RequestResult result;
 	res.status = 1;
+	m_room.activateRoom();
 	// start game
 	result.response = JsonResponsePacketSerializer::serializeResponse(res);
 	result.newHandler = nullptr; // game request handler
 	return result;
 }
 
-RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo)
+RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo requestInfo)
 {
-	return RequestResult();
+	GetRoomStateResponse res;
+	RoomData data = m_room.getRoomData();
+	RequestResult result;
+	res.answerTimeout = data.timePerQuestion;
+	res.hasGameBegun = data.isActive;
+	res.players = m_room.getAllUsers();
+	res.questionCount = data.questionCount;
+	res.status = 1;
+	result.response = JsonResponsePacketSerializer::serializeResponse(res);
+	result.newHandler = m_handlerFactory.createRoomAdminRequestHandler(m_user, m_room);
+	return result;
 }

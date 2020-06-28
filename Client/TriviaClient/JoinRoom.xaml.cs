@@ -38,7 +38,7 @@ namespace TriviaClient
                 GetRoomsResponse response = JsonConvert.DeserializeObject<GetRoomsResponse>(answer);
                 string[] rooms = response.rooms.Split(',');
                 if (rooms[0] == "" && rooms.Length == 1)
-                    return;
+                    goto label;
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     foreach (string room in rooms)
@@ -57,6 +57,7 @@ namespace TriviaClient
                         room_list_panel.Children.Add(button);
                     }
                 }));
+                label:
                 Thread.Sleep(3000);
             }
         }
@@ -64,6 +65,7 @@ namespace TriviaClient
         {
             hasEntered = true;
             WaitingRoom.roomName = ((Button)sender).Content.ToString();
+            WaitingRoom.isAdmin = false;
             string msg = "{\"roomId\":" + Communicator.roomId.ToString() + "}";
             Communicator.Send(msg, 5);
             NavigationService.Navigate(new WaitingRoom());

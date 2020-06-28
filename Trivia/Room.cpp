@@ -1,9 +1,10 @@
 #include "Room.h"
+#include "MenuRequestHandler.h"
 
 Room::Room() : m_users()
 {
 	m_metadata.id = 0;
-	m_metadata.isActive = 0;
+	m_metadata.isActive = NOT_ACTIVE;
 	m_metadata.maxPlayers = 5;
 	m_metadata.name = "";
 	m_metadata.timePerQuestion = 10;
@@ -56,5 +57,10 @@ std::vector<string> Room::getAllUsers()
 RoomData Room::getRoomData()
 {
 	return m_metadata;
+}
+
+void Room::activateRoom()
+{
+	this->m_metadata.isActive = ACTIVE;
 }
 

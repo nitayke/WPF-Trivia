@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 
@@ -36,6 +35,7 @@ namespace TriviaClient
                 maxUsers = int.Parse(num_players.Text)
             };
             WaitingRoom.roomName = roomname.Text;
+            WaitingRoom.isAdmin = true;
             string ans = Communicator.Send(JsonConvert.SerializeObject(request), 6);
             CreateRoomResponse response;
             string subStr = ans.Substring(4, 23);
