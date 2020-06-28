@@ -16,11 +16,11 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo requestinfo)
 	RequestResult req;
 	if (requestinfo.id == LOGIN)
 	{
-		req = this->login(requestinfo);
+		req = login(requestinfo);
 	}
 	else if (requestinfo.id == SIGNUP)
 	{
-		req = this->signup(requestinfo);
+		req = signup(requestinfo);
 	}
 	return req;
 }
@@ -35,7 +35,7 @@ RequestResult LoginRequestHandler::login(RequestInfo requestinfo)
 	if (res.status == LOGIN_SUCCESS)
 		result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
 	else
-		result.newHandler = this;
+		result.newHandler = m_handlerFactory->createLoginRequestHandler();
 	return result;
 }
 
@@ -49,6 +49,6 @@ RequestResult LoginRequestHandler::signup(RequestInfo requestinfo)
 	if (res.status == SIGNUP_SUCCESS)
 		result.newHandler = m_handlerFactory->createMenuRequestHandler(LoggedUser(req.username));
 	else
-		result.newHandler = this;
+		result.newHandler = m_handlerFactory->createLoginRequestHandler();
 	return result;
 }

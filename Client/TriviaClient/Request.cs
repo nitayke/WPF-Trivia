@@ -35,4 +35,12 @@
     {
         public string rooms;
     }
+    class GetRoomStateResponse
+    {
+        public int status;
+        public int hasGameBegun;
+        public string players;
+        public int questionCount;
+        public int answerTimeout;
+    }
 }

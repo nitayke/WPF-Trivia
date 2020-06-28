@@ -27,7 +27,7 @@ std::vector<RoomData> RoomManager::getRooms()
 	return roomsData;
 }
 
-Room RoomManager::getRoom(int ID)
+Room& RoomManager::getRoom(int ID)
 {
 	return this->m_rooms[ID];
 }
@@ -35,4 +35,14 @@ Room RoomManager::getRoom(int ID)
 void RoomManager::addUserToRoom(int roomId, LoggedUser user)
 {
 	m_rooms[roomId].addUser(user);
+}
+
+bool RoomManager::doesRoomExist(int ID)
+{
+	for (auto room : m_rooms)
+	{
+		if (room.first == ID)
+			return true;
+	}
+	return false;
 }

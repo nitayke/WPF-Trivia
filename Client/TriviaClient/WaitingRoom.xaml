@@ -15,9 +15,9 @@
             </Border.Background>
         </Border>
 
-        <StackPanel Margin="20">
+        <StackPanel Margin="20" x:Name="stack_panel">
             <Button Style="{StaticResource BTNCORNER}" Width="150" Height="25" Content="Close Room" Click="CloseRoom_Click"
-                    FontFamily="Tempus Sans ITC" FontSize="16" Margin="250,0,0,20"/>
+                    FontFamily="Tempus Sans ITC" FontSize="16" Margin="250,0,0,20" x:Name="leave"/>
             <TextBlock x:Name="connected" 
                            FontFamily="Ozrad CLM"
                            FontSize="30"
@@ -34,9 +34,6 @@
 
                 </StackPanel>
             </Grid>
-            <Button Style="{StaticResource BTNCORNER}" Width="200" Height="30" Content="Start Game"
-                    FontFamily="Tempus Sans ITC" FontSize="20"
-                    Click="Start_Click"/>
         </StackPanel>
 
     </Grid>
