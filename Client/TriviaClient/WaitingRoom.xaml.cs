@@ -62,7 +62,6 @@ namespace TriviaClient
                 users_panel.Children.Clear();
             }));
             string answer = Communicator.Send("", 13);
-            //string answer = Communicator.Send("{\"roomId\":" + Communicator.roomId.ToString() + "}", 7);
             answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
             // we use that as a GetUsersInRoomResponse
             GetRoomStateResponse response = JsonConvert.DeserializeObject<GetRoomStateResponse>(answer);
@@ -93,6 +92,18 @@ namespace TriviaClient
             }
             else if (hasBegun == -1)
             {
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    TextBlock roomClosed = new TextBlock()
+                    {
+                        Text = "Sorry, the room has been closed!",
+                        FontSize = 20,
+                        FontFamily = new System.Windows.Media.FontFamily("Tempus Sans ITC"),
+                        Margin = new Thickness(10)
+                    };
+                    stack_panel.Children.Add(roomClosed);
+                }));
+                Thread.Sleep(3000);
                 MainWindow.openedRoom = false;
                 gameStarted = true;
                 Dispatcher.BeginInvoke(new Action(() =>
