@@ -43,13 +43,13 @@ namespace TriviaClient
                 wrong_data.Text = "Wrong input! Please try again.";
                 return;
             }
-            string answer = Communicator.Send(JsonConvert.SerializeObject(request), 1);
-            switch (answer[15])
+            string answer = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.SIGNUP);
+            switch (answer[15] + 48)
             {
-                case '1':
+                case (char)SignupCode.SIGNUP_USERNAME_EXISTS:
                     wrong_data.Text = "Username exists! Please try again.";
                     break;
-                default:
+                case (char)SignupCode.SIGNUP_SUCCESS:
                     NavigationService.Navigate(new AfterLogging());
                     break;
             }

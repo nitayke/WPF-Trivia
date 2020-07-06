@@ -30,16 +30,16 @@ namespace TriviaClient
             MainWindow.username = username.Text;
             request.username = username.Text;
             request.password = password.Password;
-            string answer = Communicator.Send(JsonConvert.SerializeObject(request), 0);
-            switch (answer[15])
+            string answer = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.LOGIN);
+            switch ((answer[15] + 48)) // status answer
             {
-                case '1':
+                case (char)LoginCode.LOGIN_USERNAME_NOT_EXISTS:
                     wrong_data.Text = "Username doesn't exists! Please try again.";
                     break;
-                case '2':
+                case (char)LoginCode.LOGIN_WRONG_PASSWORD:
                     wrong_data.Text = "Wrong password! Please try again.";
                     break;
-                case '3':
+                case (char)LoginCode.LOGIN_USER_ALREADY_CONNECTED:
                     wrong_data.Text = "User already connected! Please try again.";
                     break;
                 default:

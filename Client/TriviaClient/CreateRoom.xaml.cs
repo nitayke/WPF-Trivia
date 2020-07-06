@@ -36,7 +36,7 @@ namespace TriviaClient
             };
             WaitingRoom.roomName = roomname.Text;
             WaitingRoom.isAdmin = true;
-            string ans = Communicator.Send(JsonConvert.SerializeObject(request), 6);
+            string ans = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.CREATEROOM);
             CreateRoomResponse response;
             string subStr = ans.Substring(4, 23);
             response = JsonConvert.DeserializeObject<CreateRoomResponse>(subStr);

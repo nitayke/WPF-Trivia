@@ -9,7 +9,7 @@ namespace TriviaClient
         public BestScores()
         {
             InitializeComponent();
-            string answer = Communicator.Send("", 8);
+            string answer = Communicator.Send("", (byte)ReqCode.GETSTATISTICS);
             answer = answer.Substring(5, answer.IndexOf('}') - 4);
             GetUserScoreResponse response = JsonConvert.DeserializeObject<GetUserScoreResponse>(answer);
             string[] arr = response.statistics.Split(',');

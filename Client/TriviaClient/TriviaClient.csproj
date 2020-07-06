@@ -77,7 +77,7 @@
     <Compile Include="MyScore.xaml.cs">
       <DependentUpon>MyScore.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Request.cs" />
+    <Compile Include="ReqAndRes.cs" />
     <Compile Include="Signup.xaml.cs">
       <DependentUpon>Signup.xaml</DependentUpon>
     </Compile>

@@ -33,7 +33,7 @@ namespace TriviaClient
                 {
                     room_list_panel.Children.Clear();
                 }));
-                string answer = Communicator.Send("", 4);
+                string answer = Communicator.Send("", (byte)ReqCode.GETROOMS);
                 answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
                 GetRoomsResponse response = JsonConvert.DeserializeObject<GetRoomsResponse>(answer);
                 string[] rooms = response.rooms.Split(',');
@@ -67,7 +67,7 @@ namespace TriviaClient
             WaitingRoom.roomName = ((Button)sender).Content.ToString();
             WaitingRoom.isAdmin = false;
             string msg = "{\"roomId\":" + Communicator.roomId.ToString() + "}";
-            Communicator.Send(msg, 5);
+            Communicator.Send(msg, (byte)ReqCode.JOINROOM);
             NavigationService.Navigate(new WaitingRoom());
         }
     }

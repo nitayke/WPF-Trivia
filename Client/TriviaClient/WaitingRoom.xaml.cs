@@ -61,7 +61,7 @@ namespace TriviaClient
             {
                 users_panel.Children.Clear();
             }));
-            string answer = Communicator.Send("", 13);
+            string answer = Communicator.Send("", (byte)ReqCode.GETROOMSTATE);
             answer = answer.Substring(answer.IndexOf('{'), answer.IndexOf('}') - 4);
             // we use that as a GetUsersInRoomResponse
             GetRoomStateResponse response = JsonConvert.DeserializeObject<GetRoomStateResponse>(answer);
@@ -119,8 +119,8 @@ namespace TriviaClient
                 roomId = Communicator.roomId
             };
             string req = JsonConvert.SerializeObject(joinRoomRequest);
-            int code = isAdmin ? 9 : 12;
-            Communicator.Send(req, (byte)code);
+            byte code = isAdmin ? (byte)ReqCode.CLOSEROOM : (byte)ReqCode.LEAVEROOM;
+            Communicator.Send(req, code);
             NavigationService.Navigate(new AfterLogging());
             MainWindow.openedRoom = false;
             gameStarted = true; // to stop checking

@@ -43,4 +43,36 @@
         public int questionCount;
         public int answerTimeout;
     }
+
+    enum ReqCode
+    {
+        LOGIN,
+        SIGNUP,
+        ERRORCODE,
+        LOGOUT,
+        GETROOMS, // 4
+        JOINROOM,
+        CREATEROOM,
+        GETPLAYERSINROOM,
+        GETSTATISTICS, // 8
+        CLOSEROOM,
+        GETUSERSCORE,
+        STARTGAME,
+        LEAVEROOM, // 12
+        GETROOMSTATE
+    }
+
+    enum SignupCode
+    {
+        SIGNUP_SUCCESS,
+        SIGNUP_USERNAME_EXISTS
+    }
+
+    enum LoginCode
+    {
+        LOGIN_SUCCESS,
+        LOGIN_USERNAME_NOT_EXISTS,
+        LOGIN_WRONG_PASSWORD,
+        LOGIN_USER_ALREADY_CONNECTED
+    };
 }

@@ -28,13 +28,13 @@ namespace TriviaClient
         }
         private void Signout_Click(object sender, RoutedEventArgs e)
         {
-            Communicator.Send("", 3);
+            Communicator.Send("", (byte)ReqCode.LOGOUT);
             MainWindow.isLoggedIn = false;
             NavigationService.Navigate(new Menu());
         }
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
-            Communicator.Send("", 3);
+            Communicator.Send("", (byte)ReqCode.LOGOUT);
             Environment.Exit(0);
         }
     }
