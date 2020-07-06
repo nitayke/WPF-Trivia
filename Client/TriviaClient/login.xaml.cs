@@ -30,6 +30,11 @@ namespace TriviaClient
             MainWindow.username = username.Text;
             request.username = username.Text;
             request.password = password.Password;
+            if (request.username == "" || request.password == "")
+            {
+                wrong_data.Text = "Wrong input! Please try again.";
+                return;
+            }
             string answer = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.LOGIN);
             switch ((answer[15] - 48)) // status answer
             {
