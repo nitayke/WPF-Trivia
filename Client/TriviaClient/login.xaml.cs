@@ -31,7 +31,7 @@ namespace TriviaClient
             request.username = username.Text;
             request.password = password.Password;
             string answer = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.LOGIN);
-            switch ((answer[15] + 48)) // status answer
+            switch ((answer[15] - 48)) // status answer
             {
                 case (char)LoginCode.LOGIN_USERNAME_NOT_EXISTS:
                     wrong_data.Text = "Username doesn't exists! Please try again.";

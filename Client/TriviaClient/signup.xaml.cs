@@ -44,7 +44,7 @@ namespace TriviaClient
                 return;
             }
             string answer = Communicator.Send(JsonConvert.SerializeObject(request), (byte)ReqCode.SIGNUP);
-            switch (answer[15] + 48)
+            switch (answer[15] - 48)
             {
                 case (char)SignupCode.SIGNUP_USERNAME_EXISTS:
                     wrong_data.Text = "Username exists! Please try again.";
